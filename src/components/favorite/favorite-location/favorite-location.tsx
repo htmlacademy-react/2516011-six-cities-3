@@ -1,11 +1,12 @@
-import FavoriteCard, { FavoriteCardProps } from '../favorite-card/favorite-card';
+import FavoriteCard from '../favorite-card/favorite-card';
+import {FavoriteCardProps} from '../../../types/card';
 
-interface FavoriteLocationProps {
+interface Props {
   city: string;
   places: FavoriteCardProps[];
 }
 
-function FavoriteLocation ({ city, places }: FavoriteLocationProps) {
+function FavoriteLocation ({ city, places }: Props) {
   return (
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">

@@ -9,11 +9,11 @@ interface Review {
   date: string;
 }
 
-interface OfferReviewsProps {
+interface Props {
   reviews: Review[];
 }
 
-function OfferReviews({ reviews }: OfferReviewsProps) {
+function OfferReviews({ reviews }: Props) {
   return (
     <section className="offer__reviews reviews">
       <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>

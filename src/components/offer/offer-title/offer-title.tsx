@@ -1,10 +1,10 @@
-interface OfferTitleProps {
+interface Props {
   title: string;
   isPremium: boolean;
   isFavorite: boolean;
 }
 
-function OfferTitle({ title, isPremium, isFavorite }: OfferTitleProps) {
+function OfferTitle({ title, isPremium, isFavorite }: Props) {
   return (
     <>
       {isPremium && (

@@ -1,12 +1,4 @@
-export interface FavoriteCardProps {
-  id: number;
-  title: string;
-  type: string;
-  price: number;
-  rating: number;
-  image: string;
-  isPremium: boolean;
-}
+import { FavoriteCardProps } from '../../../types/card';
 
 function FavoriteCard({ id, title, type, price, rating, image, isPremium }: FavoriteCardProps) {
   return (
