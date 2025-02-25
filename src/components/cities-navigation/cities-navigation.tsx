@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+import clsx from 'clsx';
 import { CITIES } from '../../utils/const';
 
 function CitiesNavigation() {
@@ -7,9 +9,12 @@ function CitiesNavigation() {
         <ul className="locations__list tabs__list">
           {CITIES.map((city) => (
             <li key={city} className="locations__item">
-              <a className={`locations__item-link tabs__item ${city === 'Amsterdam' ? 'tabs__item--active' : ''}`} href="#">
+              <Link className={clsx('locations__item-link tabs__item', {
+                'tabs__item--active': city === 'Amsterdam',
+              })} to="#"
+              >
                 <span>{city}</span>
-              </a>
+              </Link>
             </li>
           ))}
         </ul>

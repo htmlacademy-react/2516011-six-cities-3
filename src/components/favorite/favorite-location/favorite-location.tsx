@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import FavoriteCard from '../favorite-card/favorite-card';
 import {FavoriteCardProps} from '../../../types/card';
 
@@ -11,9 +12,9 @@ function FavoriteLocation ({ city, places }: Props) {
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
         <div className="locations__item">
-          <a className="locations__item-link" href="#">
+          <Link className="locations__item-link" to="#">
             <span>{city}</span>
-          </a>
+          </Link>
         </div>
       </div>
       <div className="favorites__places">
