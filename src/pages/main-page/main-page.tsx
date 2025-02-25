@@ -3,7 +3,7 @@ import Header from '../../components/header/header';
 import SortForm from '../../components/sort-form/sort-form';
 
 import { offers } from '../../mocks/offers';
-import {SORT_OPTIONS} from '../../utils/const.ts';
+import {SortOptions} from '../../utils/const.ts';
 
 interface MainPageProps {
   rentalOffersCount: number;
@@ -60,12 +60,12 @@ function MainPage({ rentalOffersCount }: MainPageProps) {
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
                 <b className="places__found">{rentalOffersCount} places to stay in Amsterdam</b>
-                <SortForm currentSort={SORT_OPTIONS.Popular} />
+                <SortForm currentSort={SortOptions.Popular} />
                 <div className="cities__places-list places__list tabs__content">
                   {offers.map((offer) => (
                     <PlaceCard
                       key={offer.id}
-                      id={+offer.id}
+                      id={offer.id}
                       title={offer.title}
                       type={offer.type}
                       price={offer.price}
