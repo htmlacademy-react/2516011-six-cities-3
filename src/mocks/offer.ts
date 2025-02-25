@@ -1,5 +1,5 @@
 export const offer = {
-  id: '6af6f711-c28d-4121-82cd-e0b462a27f00',
+  id: 'fb5e29ef-99ee-4170-bf58-1894490a61fc',
   title: 'Beautiful & luxurious studio at great location',
   type: 'Apartment',
   price: 120,

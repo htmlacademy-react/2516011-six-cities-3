@@ -29,7 +29,6 @@ function App({ rentalOffersCount }: AppProps) {
           path={`${AppRoutes.OFFER}`}
           element={<OfferPage offer={offer} />}
         />
-
         <Route
           path={AppRoutes.FAVORITES}
           element={
@@ -40,7 +39,6 @@ function App({ rentalOffersCount }: AppProps) {
             </PrivateRoute>
           }
         />
-
         <Route
           path={AppRoutes.NOT_FOUND}
           element={<NotFoundPage />}

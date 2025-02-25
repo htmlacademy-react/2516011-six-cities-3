@@ -1,3 +1,6 @@
+import { useParams, Navigate } from 'react-router-dom';
+import { AppRoutes } from '../../utils/const';
+
 import Header from '../../components/header/header';
 import OfferGallery from '../../components/offer/offer-gallery/offer-gallery';
 import OfferTitle from '../../components/offer/offer-title/offer-title';
@@ -17,7 +20,7 @@ import { offers } from '../../mocks/offers';
 // Берем первые три элемента (пока из массива offers для примера)
 const nearPlaces = offers.slice(0, 3);
 
-interface OfferPageProps {
+interface Props {
   offer: {
     id: string;
     title: string;
@@ -52,7 +55,13 @@ interface OfferPageProps {
   };
 }
 
-function OfferPage({ offer }: OfferPageProps) {
+function OfferPage({ offer }: Props) {
+  const { id } = useParams();
+
+  if (!id || offer.id !== id) {
+    return <Navigate to={AppRoutes.NOT_FOUND} />; // Перенаправляем на 404
+  }
+
   return (
     <div className="page">
       <Header/>
