@@ -19,4 +19,18 @@ enum SortOptions {
   TopRatedFirst = 'Top rated first',
 }
 
-export {RENTAL_OFFERS_COUNT, RATING_MULTIPLIER, CITIES, RATINGS, SortOptions};
+enum AppRoutes {
+  MAIN = '/',
+  LOGIN = '/login',
+  FAVORITES = '/favorites',
+  OFFER = '/offer/:id',
+  NOT_FOUND = '*',
+}
+
+enum AuthorizationStatus {
+  Auth = 'AUTH',
+  NoAuth = 'NO_AUTH',
+  Unknown = 'UNKNOWN',
+}
+
+export {RENTAL_OFFERS_COUNT, RATING_MULTIPLIER, CITIES, RATINGS, SortOptions, AppRoutes, AuthorizationStatus};
