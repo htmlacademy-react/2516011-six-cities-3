@@ -1,13 +1,12 @@
-import {SORT_OPTIONS} from '../../utils/const';
+import { SortOptions } from '../../utils/const';
+import { SortOption } from '../../types/sort';
 
-type SortOption = (typeof SORT_OPTIONS)[keyof typeof SORT_OPTIONS];
-
-interface SortFormProps {
+interface Props {
   currentSort: SortOption;
 }
 
-function SortForm({ currentSort }: SortFormProps) {
-  const ifIsOpen = true;
+function SortForm({ currentSort }: Props) {
+  const IsOpen = true;
 
   return (
     <form className="places__sorting" action="#" method="get">
@@ -18,9 +17,9 @@ function SortForm({ currentSort }: SortFormProps) {
           <use xlinkHref="#icon-arrow-select"></use>
         </svg>
       </span>
-      {ifIsOpen && (
+      {IsOpen && (
         <ul className="places__options places__options--custom places__options--opened">
-          {Object.values(SORT_OPTIONS).map((option) => (
+          {Object.values(SortOptions).map((option) => (
             <li
               key={option}
               className={`places__option ${option === currentSort ? 'places__option--active' : ''}`}
