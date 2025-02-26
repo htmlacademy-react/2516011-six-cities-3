@@ -1,8 +1,8 @@
-interface OfferRatingProps {
+interface Props {
   rating: number;
 }
 
-function OfferRating({ rating }: OfferRatingProps) {
+function OfferRating({ rating }: Props) {
   return (
     <div className="offer__rating rating">
       <div className="offer__stars rating__stars">

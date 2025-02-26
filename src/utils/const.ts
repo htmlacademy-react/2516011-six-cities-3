@@ -1,10 +1,36 @@
-const SORT_OPTIONS = {
-  Popular: 'Popular',
-  PriceLowToHigh: 'Price: low to high',
-  PriceHighToLow: 'Price: high to low',
-  TopRatedFirst: 'Top rated first',
-} as const;
-
 const RENTAL_OFFERS_COUNT = 312;
 
-export {SORT_OPTIONS, RENTAL_OFFERS_COUNT};
+const RATING_MULTIPLIER = 20;
+
+const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
+
+const RATINGS = [
+  { value: 5, title: 'perfect' },
+  { value: 4, title: 'good' },
+  { value: 3, title: 'not bad' },
+  { value: 2, title: 'badly' },
+  { value: 1, title: 'terribly' },
+];
+
+enum SortOptions {
+  Popular = 'Popular',
+  PriceLowToHigh = 'Price: low to high',
+  PriceHighToLow = 'Price: high to low',
+  TopRatedFirst = 'Top rated first',
+}
+
+enum AppRoutes {
+  MAIN = '/',
+  LOGIN = '/login',
+  FAVORITES = '/favorites',
+  OFFER = '/offer/:id',
+  NOT_FOUND = '*',
+}
+
+enum AuthorizationStatus {
+  Auth = 'AUTH',
+  NoAuth = 'NO_AUTH',
+  Unknown = 'UNKNOWN',
+}
+
+export {RENTAL_OFFERS_COUNT, RATING_MULTIPLIER, CITIES, RATINGS, SortOptions, AppRoutes, AuthorizationStatus};

@@ -1,12 +1,5 @@
-export interface FavoriteCardProps {
-  id: number;
-  title: string;
-  type: string;
-  price: number;
-  rating: number;
-  image: string;
-  isPremium: boolean;
-}
+import { Link } from 'react-router-dom';
+import { FavoriteCardProps } from '../../../types/card';
 
 function FavoriteCard({ id, title, type, price, rating, image, isPremium }: FavoriteCardProps) {
   return (
@@ -17,9 +10,9 @@ function FavoriteCard({ id, title, type, price, rating, image, isPremium }: Favo
         </div>
       )}
       <div className="favorites__image-wrapper place-card__image-wrapper">
-        <a href="#">
+        <Link to="#">
           <img className="place-card__image" src={image} width="150" height="110" alt="Place image" />
-        </a>
+        </Link>
       </div>
       <div className="favorites__card-info place-card__info">
         <div className="place-card__price-wrapper">
@@ -41,7 +34,7 @@ function FavoriteCard({ id, title, type, price, rating, image, isPremium }: Favo
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <Link to="#">{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

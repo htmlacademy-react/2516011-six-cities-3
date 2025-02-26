@@ -1,8 +1,8 @@
-interface OfferPriceProps {
+interface Props {
   price: number;
 }
 
-function OfferPrice({ price }: OfferPriceProps){
+function OfferPrice({ price }: Props){
   return (
     <div className="offer__price">
       <b className="offer__price-value">&euro;{price}</b>

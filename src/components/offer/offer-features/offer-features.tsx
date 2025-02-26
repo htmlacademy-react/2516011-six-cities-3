@@ -1,10 +1,10 @@
-interface OfferFeaturesProps {
+interface Props {
   type: string;
   bedrooms: number;
   maxAdults: number;
 }
 
-function OfferFeatures({ type, bedrooms, maxAdults }: OfferFeaturesProps) {
+function OfferFeatures({ type, bedrooms, maxAdults }: Props) {
   return (
     <ul className="offer__features">
       <li className="offer__feature offer__feature--entire">{type}</li>

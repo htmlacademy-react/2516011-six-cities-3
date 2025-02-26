@@ -1,21 +1,11 @@
 import PlaceCard from '../../place-card/place-card';
+import { PlaceCardProps } from '../../../types/card';
 
-interface PlaceCardProps {
-  id: string;
-  title: string;
-  type: string;
-  price: number;
-  isFavorite: boolean;
-  isPremium: boolean;
-  rating: number;
-  previewImage: string;
-}
-
-interface NearPlacesProps {
+interface Props {
   offers: PlaceCardProps[];
 }
 
-function NearPlaces({ offers }: NearPlacesProps) {
+function NearPlaces({ offers }: Props) {
   return (
     <section className="near-places places">
       <h2 className="near-places__title">Other places in the neighbourhood</h2>
@@ -23,7 +13,7 @@ function NearPlaces({ offers }: NearPlacesProps) {
         {offers.map((offer) => (
           <PlaceCard
             key={offer.id}
-            id={+offer.id}
+            id={offer.id}
             title={offer.title}
             type={offer.type}
             price={offer.price}

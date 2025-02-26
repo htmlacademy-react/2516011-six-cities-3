@@ -1,18 +1,20 @@
-import FavoriteCard, { FavoriteCardProps } from '../favorite-card/favorite-card';
+import { Link } from 'react-router-dom';
+import FavoriteCard from '../favorite-card/favorite-card';
+import {FavoriteCardProps} from '../../../types/card';
 
-interface FavoriteLocationProps {
+interface Props {
   city: string;
   places: FavoriteCardProps[];
 }
 
-function FavoriteLocation ({ city, places }: FavoriteLocationProps) {
+function FavoriteLocation ({ city, places }: Props) {
   return (
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
         <div className="locations__item">
-          <a className="locations__item-link" href="#">
+          <Link className="locations__item-link" to="#">
             <span>{city}</span>
-          </a>
+          </Link>
         </div>
       </div>
       <div className="favorites__places">

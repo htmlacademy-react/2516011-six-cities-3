@@ -1,4 +1,4 @@
-interface OfferMapProps {
+interface Props {
   location: {
     latitude: number;
     longitude: number;
@@ -6,7 +6,7 @@ interface OfferMapProps {
   };
 }
 
-function OfferMap({ location }: OfferMapProps) {
+function OfferMap({ location }: Props) {
   return (
     <section className="offer__map map">
       <p>{`${location.latitude}, ${location.longitude}`}</p>
