@@ -1,4 +1,6 @@
-export const offers = [
+import { OfferShort } from '../types/offer.ts';
+
+export const offers: OfferShort[] = [
   {
     id: 'fb5e29ef-99ee-4170-bf58-1894490a61fc',
     title: 'Waterfront with extraordinary view',
