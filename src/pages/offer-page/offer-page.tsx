@@ -58,8 +58,10 @@ interface Props {
 function OfferPage({ offer }: Props) {
   const { id } = useParams();
 
+  console.log(id);
+  console.log(offer.id);
   if (!id || offer.id !== id) {
-    return <Navigate to={AppRoutes.NOT_FOUND} />; // Перенаправляем на 404
+    return <Navigate to={AppRoutes.NOT_FOUND} />;
   }
 
   return (

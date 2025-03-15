@@ -1,5 +1,10 @@
 import PlaceCard from '../../place-card/place-card';
-import { PlaceCardProps } from '../../../types/card';
+import { BaseCardProps } from '../../../types/card';
+
+export interface PlaceCardProps extends BaseCardProps {
+  previewImage: string;
+  isFavorite: boolean;
+}
 
 interface Props {
   offers: PlaceCardProps[];

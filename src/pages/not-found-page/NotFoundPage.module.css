@@ -1,0 +1,24 @@
+.notFoundContainer {
+  text-align: center;
+  padding: 50px;
+}
+
+.notFoundTitle {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.notFoundText {
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.homeLink {
+  font-size: 18px;
+  color: #007BFF;
+  text-decoration: none;
+}
+
+.homeLink:hover {
+  text-decoration: underline;
+}

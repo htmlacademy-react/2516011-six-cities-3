@@ -1,7 +1,11 @@
 import { Link } from 'react-router-dom';
-import { FavoriteCardProps } from '../../../types/card';
+import { BaseCardProps } from '../../../types/card';
 
-function FavoriteCard({ id, title, type, price, rating, image, isPremium }: FavoriteCardProps) {
+export interface Props extends BaseCardProps {
+  image: string;
+}
+
+function FavoriteCard({ id, title, type, price, rating, image, isPremium }: Props) {
   return (
     <article className="favorites__card place-card" data-id={id}>
       {isPremium && (

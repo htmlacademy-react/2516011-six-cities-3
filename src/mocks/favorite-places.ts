@@ -5,7 +5,7 @@ export const favoritePlaces: City[] = [
     city: 'Amsterdam',
     places: [
       {
-        id: 1,
+        id: 'fb5e29ef-99ee-4170-bf58-1894490a61fc',
         title: 'Nice, cozy, warm big bed apartment',
         type: 'Apartment',
         price: 180,
@@ -14,7 +14,7 @@ export const favoritePlaces: City[] = [
         isPremium: true,
       },
       {
-        id: 2,
+        id: '6af6f711-c28d-4121-82cd-e0b462a27f02',
         title: 'Wood and stone place',
         type: 'Room',
         price: 80,
@@ -28,7 +28,7 @@ export const favoritePlaces: City[] = [
     city: 'Cologne',
     places: [
       {
-        id: 3,
+        id: '6af6f711-c28d-4121-82cd-e0b462a27f03',
         title: 'White castle',
         type: 'Apartment',
         price: 180,

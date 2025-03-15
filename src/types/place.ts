@@ -1,5 +1,5 @@
 export interface Place {
-  id: number;
+  id: string;
   title: string;
   type: string;
   price: number;
