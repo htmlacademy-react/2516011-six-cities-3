@@ -1,9 +1,23 @@
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import FavoriteLocation from '../../components/favorite/favorite-location/favorite-location';
-import { favoritePlaces } from '../../mocks/favorite-places';
+import { OfferShort } from '../../types/offer';
 
-function FavoritesPage() {
+interface FavoritesPageProps {
+  favoritePlaces: OfferShort[];
+}
+
+function FavoritesPage({ favoritePlaces }: FavoritesPageProps) {
+
+  const groupedFavorites = favoritePlaces.reduce<{ [key: string]: OfferShort[] }>((acc, offer) => {
+    const cityName = offer.city.name;
+    if (!acc[cityName]) {
+      acc[cityName] = [];
+    }
+    acc[cityName].push(offer);
+    return acc;
+  }, {});
+
   const hasFavorites = favoritePlaces.length > 0;
 
   return (
@@ -15,8 +29,8 @@ function FavoritesPage() {
             <section className="favorites">
               <h1 className="favorites__title">Saved Listing</h1>
               <ul className="favorites__list">
-                {favoritePlaces.map((city) => (
-                  <FavoriteLocation key={city.city} city={city.city} places={city.places.map((place) => ({ ...place, id: String(place.id) }))} />
+                {Object.entries(groupedFavorites).map(([cityName, offers]) => (
+                  <FavoriteLocation key={cityName} cityName={cityName} offers={offers} />
                 ))}
               </ul>
             </section>

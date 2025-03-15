@@ -1,11 +1,7 @@
 import { Link } from 'react-router-dom';
-import { BaseCardProps } from '../../../types/card';
+import { OfferShort } from '../../../types/offer';
 
-export interface Props extends BaseCardProps {
-  image: string;
-}
-
-function FavoriteCard({ id, title, type, price, rating, image, isPremium }: Props) {
+function FavoriteCard({ id, title, type, price, rating, previewImage, isPremium }: OfferShort) {
   return (
     <article className="favorites__card place-card" data-id={id}>
       {isPremium && (
@@ -15,7 +11,7 @@ function FavoriteCard({ id, title, type, price, rating, image, isPremium }: Prop
       )}
       <div className="favorites__image-wrapper place-card__image-wrapper">
         <Link to="#">
-          <img className="place-card__image" src={image} width="150" height="110" alt="Place image" />
+          <img className="place-card__image" src={previewImage} width="150" height="110" alt="Place image" />
         </Link>
       </div>
       <div className="favorites__card-info place-card__info">

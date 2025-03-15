@@ -14,53 +14,25 @@ import OfferMap from '../../components/offer/offer-map/offer-map';
 import ReviewsForm from '../../components/offer/offer-reviews-form/offer-reviews-form';
 import NearPlaces from '../../components/offer/offer-near-places/offer-near-places';
 
-import { reviews } from '../../mocks/reviews';
-import { offers } from '../../mocks/offers';
-
-// Берем первые три элемента (пока из массива offers для примера)
-const nearPlaces = offers.slice(0, 3);
+import { OfferFull, OfferShort } from '../../types/offer';
+import { Review } from '../../types/reviews';
 
 interface Props {
-  offer: {
-    id: string;
-    title: string;
-    type: string;
-    price: number;
-    city: {
-      name: string;
-      location: {
-        latitude: number;
-        longitude: number;
-        zoom: number;
-      };
-    };
-    location: {
-      latitude: number;
-      longitude: number;
-      zoom: number;
-    };
-    isFavorite: boolean;
-    isPremium: boolean;
-    rating: number;
-    description: string;
-    bedrooms: number;
-    goods: string[];
-    host: {
-      name: string;
-      avatarUrl: string;
-      isPro: boolean;
-    };
-    images: string[];
-    maxAdults: number;
-  };
+  fullOffers: OfferFull[];
+  offers: OfferShort[];
+  reviews: Review[];
 }
 
-function OfferPage({ offer }: Props) {
+function OfferPage({fullOffers, offers, reviews}: Props) {
   const { id } = useParams();
 
-  console.log(id);
-  console.log(offer.id);
-  if (!id || offer.id !== id) {
+  if (!id) {
+    return <Navigate to={AppRoutes.NOT_FOUND} />;
+  }
+
+  const selectedOffer = fullOffers.find((offer) => offer.id === id);
+
+  if (!selectedOffer) {
     return <Navigate to={AppRoutes.NOT_FOUND} />;
   }
 
@@ -69,25 +41,25 @@ function OfferPage({ offer }: Props) {
       <Header/>
       <main className="page__main page__main--offer">
         <section className="offer">
-          <OfferGallery images={offer.images}/>
+          <OfferGallery images={selectedOffer.images}/>
           <div className="offer__container container">
             <div className="offer__wrapper">
-              <OfferTitle title={offer.title} isPremium={offer.isPremium} isFavorite={offer.isFavorite}/>
-              <OfferRating rating={offer.rating}/>
-              <OfferFeatures type={offer.type} bedrooms={offer.bedrooms} maxAdults={offer.maxAdults}/>
-              <OfferPrice price={offer.price}/>
-              <OfferInside goods={offer.goods}/>
-              <OfferHost host={offer.host} description={offer.description}/>
+              <OfferTitle title={selectedOffer.title} isPremium={selectedOffer.isPremium} isFavorite={selectedOffer.isFavorite}/>
+              <OfferRating rating={selectedOffer.rating}/>
+              <OfferFeatures type={selectedOffer.type} bedrooms={selectedOffer.bedrooms} maxAdults={selectedOffer.maxAdults}/>
+              <OfferPrice price={selectedOffer.price}/>
+              <OfferInside goods={selectedOffer.goods}/>
+              <OfferHost host={selectedOffer.host} description={selectedOffer.description}/>
               <section className="offer__reviews reviews">
                 <OfferReviews reviews={reviews}/>
                 <ReviewsForm/>
               </section>
             </div>
           </div>
-          <OfferMap location={offer.location}/>
+          <OfferMap location={selectedOffer.location}/>
         </section>
         <div className="container">
-          <NearPlaces offers={nearPlaces}/>
+          <NearPlaces offers={offers}/>
         </div>
       </main>
     </div>
