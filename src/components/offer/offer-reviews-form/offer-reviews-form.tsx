@@ -27,7 +27,7 @@ function ReviewsForm() {
     event.preventDefault();
     if (rating && reviewText.length >= 50) {
       // Здесь вы можете отправить данные формы, например, на сервер
-      console.log('Review submitted:', { reviewText, rating });
+      //console.log('Review submitted:', { reviewText, rating });
     }
   };
 

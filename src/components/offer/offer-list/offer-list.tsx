@@ -7,6 +7,7 @@ interface OfferListProps {
 }
 
 function OfferList({ offers }: OfferListProps) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_activeOfferId, setActiveOfferId] = useState<string | null>(null);
 
   return (
