@@ -1,11 +1,11 @@
 import PlaceCard from '../../place-card/place-card';
-import { PlaceCardProps } from '../../../types/card';
+import { OfferShort } from '../../../types/offer';
 
 interface Props {
-  offers: PlaceCardProps[];
+  offers: OfferShort[];
 }
 
-function NearPlaces({ offers }: Props) {
+function NearPlaces({offers}: Props) {
   return (
     <section className="near-places places">
       <h2 className="near-places__title">Other places in the neighbourhood</h2>

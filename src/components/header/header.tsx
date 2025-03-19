@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { AppRoutes } from '../../utils/const';
 
 function Header() {
   const isUserLoggedIn = true;
@@ -10,7 +11,7 @@ function Header() {
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <Link className="header__logo-link header__logo-link--active" to="#">
+            <Link className="header__logo-link header__logo-link--active" to={AppRoutes.MAIN}>
               <img
                 className="header__logo"
                 src="img/logo.svg"

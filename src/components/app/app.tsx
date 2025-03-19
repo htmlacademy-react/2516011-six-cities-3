@@ -7,41 +7,53 @@ import OfferPage from '../../pages/offer-page/offer-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import PrivateRoute from '../private-route/private-route';
 
-import {offer} from '../../mocks/offer.ts';
+import {OfferFull, OfferShort} from '../../types/offer.ts';
+import {Review} from '../../types/reviews.ts';
 
 interface AppProps {
   rentalOffersCount: number;
+  fullOffers: OfferFull[];
+  offers: OfferShort[];
+  favoritePlaces?: OfferShort[];
+  reviews?: Review[];
 }
 
-function App({ rentalOffersCount }: AppProps) {
+function App({rentalOffersCount, fullOffers, offers, favoritePlaces = [], reviews = []}: AppProps) {
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoutes.MAIN}
-          element={<MainPage rentalOffersCount={rentalOffersCount} />}
+          element={<MainPage rentalOffersCount={rentalOffersCount} offers={offers}/>}
         />
         <Route
           path={AppRoutes.LOGIN}
-          element={<LoginPage />}
+          element={<LoginPage/>}
         />
         <Route
           path={`${AppRoutes.OFFER}`}
-          element={<OfferPage offer={offer} />}
+          element=
+            {
+              <OfferPage
+                fullOffers={fullOffers}
+                offers={offers}
+                reviews={reviews}
+              />
+            }
         />
         <Route
           path={AppRoutes.FAVORITES}
           element={
             <PrivateRoute
-              authorizationStatus={AuthorizationStatus.NoAuth}
+              authorizationStatus={AuthorizationStatus.Auth}
             >
-              <FavoritesPage />
+              <FavoritesPage favoritePlaces={favoritePlaces}/>
             </PrivateRoute>
           }
         />
         <Route
           path={AppRoutes.NOT_FOUND}
-          element={<NotFoundPage />}
+          element={<NotFoundPage/>}
         />
       </Routes>
     </BrowserRouter>

@@ -2,14 +2,15 @@ import Header from '../../components/header/header';
 import CitiesNavigation from '../../components/cities-navigation/cities-navigation';
 import SortForm from '../../components/sort-form/sort-form';
 import { SortOptions } from '../../utils/const';
-import { offers } from '../../mocks/offers';
-import PlaceCard from '../../components/place-card/place-card';
+import OfferList from '../../components/offer/offer-list/offer-list';
+import {OfferShort} from '../../types/offer.ts';
 
 interface MainPageProps {
   rentalOffersCount: number;
+  offers: OfferShort[];
 }
 
-function MainPage({ rentalOffersCount }: MainPageProps) {
+function MainPage({ rentalOffersCount, offers }: MainPageProps) {
   const hasOffers = offers.length > 0;
 
   return (
@@ -25,28 +26,14 @@ function MainPage({ rentalOffersCount }: MainPageProps) {
                 <h2 className="visually-hidden">Places</h2>
                 <b className="places__found">{rentalOffersCount} places to stay in Amsterdam</b>
                 <SortForm currentSort={SortOptions.Popular} />
-                <div className="cities__places-list places__list tabs__content">
-                  {offers.map((offer) => (
-                    <PlaceCard
-                      key={offer.id}
-                      id={offer.id}
-                      title={offer.title}
-                      type={offer.type}
-                      price={offer.price}
-                      isFavorite={offer.isFavorite}
-                      isPremium={offer.isPremium}
-                      rating={offer.rating}
-                      previewImage={offer.previewImage}
-                    />
-                  ))}
-                </div>
+                <OfferList offers={offers} />
               </section>
             ) : (
               <section className="cities__no-places">
                 <div className="cities__status-wrapper tabs__content">
                   <b className="cities__status">No places to stay available</b>
                   <p className="cities__status-description">
-                        We could not find any property available at the moment in Amsterdam
+                    We could not find any property available at the moment in Amsterdam
                   </p>
                 </div>
               </section>

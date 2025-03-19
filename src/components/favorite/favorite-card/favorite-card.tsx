@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import { FavoriteCardProps } from '../../../types/card';
+import { OfferShort } from '../../../types/offer';
 
-function FavoriteCard({ id, title, type, price, rating, image, isPremium }: FavoriteCardProps) {
+function FavoriteCard({ id, title, type, price, rating, previewImage, isPremium }: OfferShort) {
   return (
     <article className="favorites__card place-card" data-id={id}>
       {isPremium && (
@@ -11,7 +11,7 @@ function FavoriteCard({ id, title, type, price, rating, image, isPremium }: Favo
       )}
       <div className="favorites__image-wrapper place-card__image-wrapper">
         <Link to="#">
-          <img className="place-card__image" src={image} width="150" height="110" alt="Place image" />
+          <img className="place-card__image" src={previewImage} width="150" height="110" alt="Place image" />
         </Link>
       </div>
       <div className="favorites__card-info place-card__info">
