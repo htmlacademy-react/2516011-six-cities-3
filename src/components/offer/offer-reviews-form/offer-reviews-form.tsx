@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { RATINGS } from '../../../utils/const';
+import './offer-reviews-form.styles.scss';
 
 function ReviewsForm() {
   const [reviewText, setReviewText] = useState('');
