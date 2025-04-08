@@ -1,4 +1,5 @@
 import { OfferFull } from '../types/offer.ts';
+import { addIdToImages } from '../utils/imageUtils';
 
 export const fullOffers: OfferFull[] = [
   {
@@ -30,10 +31,10 @@ export const fullOffers: OfferFull[] = [
       avatarUrl: 'img/avatar-angelina.jpg',
       isPro: true,
     },
-    images: [
+    images: addIdToImages([
       'https://15.design.htmlacademy.pro/static/hotel/6.jpg',
       'https://15.design.htmlacademy.pro/static/hotel/7.jpg',
-    ],
+    ]),
     maxAdults: 4,
   },
   {
@@ -65,10 +66,10 @@ export const fullOffers: OfferFull[] = [
       avatarUrl: 'img/avatar-john.jpg',
       isPro: false,
     },
-    images: [
-      'https://15.design.htmlacademy.pro/static/hotel/9.jpg',
-      'https://15.design.htmlacademy.pro/static/hotel/10.jpg',
-    ],
+    images: addIdToImages([
+      'https://15.design.htmlacademy.pro/static/hotel/6.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/7.jpg',
+    ]),
     maxAdults: 2,
   },
   {
@@ -100,10 +101,10 @@ export const fullOffers: OfferFull[] = [
       avatarUrl: 'img/avatar-emma.jpg',
       isPro: true,
     },
-    images: [
-      'https://15.design.htmlacademy.pro/static/hotel/11.jpg',
-      'https://15.design.htmlacademy.pro/static/hotel/12.jpg',
-    ],
+    images: addIdToImages([
+      'https://15.design.htmlacademy.pro/static/hotel/6.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/7.jpg',
+    ]),
     maxAdults: 3,
   },
   {
@@ -135,10 +136,10 @@ export const fullOffers: OfferFull[] = [
       avatarUrl: 'img/avatar-carlos.jpg',
       isPro: false,
     },
-    images: [
-      'https://15.design.htmlacademy.pro/static/hotel/13.jpg',
-      'https://15.design.htmlacademy.pro/static/hotel/14.jpg',
-    ],
+    images: addIdToImages([
+      'https://15.design.htmlacademy.pro/static/hotel/6.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/7.jpg',
+    ]),
     maxAdults: 5,
   },
   {
@@ -170,10 +171,10 @@ export const fullOffers: OfferFull[] = [
       avatarUrl: 'img/avatar-marco.jpg',
       isPro: true,
     },
-    images: [
-      'https://15.design.htmlacademy.pro/static/hotel/15.jpg',
-      'https://15.design.htmlacademy.pro/static/hotel/16.jpg',
-    ],
+    images: addIdToImages([
+      'https://15.design.htmlacademy.pro/static/hotel/6.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/7.jpg',
+    ]),
     maxAdults: 6,
   },
 ];

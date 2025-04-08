@@ -1,18 +1,19 @@
-import React from 'react';
+interface Image {
+  id: string;
+  url: string;
+}
 
 interface Props {
-  images: string[];
+  images: Image[];
 }
 
 function OfferGallery({ images }: Props) {
-  const imageKeys = React.useMemo(() => images.map(() => crypto.randomUUID()), [images]);
-
   return (
     <div className="offer__gallery-container container">
       <div className="offer__gallery">
-        {images.map((image, index) => (
-          <div className="offer__image-wrapper" key={imageKeys[index]}>
-            <img className="offer__image" src={image} alt="Photo studio" />
+        {images.map((image) => (
+          <div className="offer__image-wrapper" key={image.id}>
+            <img className="offer__image" src={image.url} alt="Photo studio" />
           </div>
         ))}
       </div>

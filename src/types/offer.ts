@@ -36,7 +36,7 @@ export interface OfferFull extends BaseOffer {
   bedrooms: number;
   goods: string[];
   host: Host;
-  images: string[];
+  images: { id: string; url: string }[];
   maxAdults: number;
 }
 
