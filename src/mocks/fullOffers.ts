@@ -1,4 +1,5 @@
 import { OfferFull } from '../types/offer.ts';
+import { addIdToImages } from '../utils/imageUtils';
 
 export const fullOffers: OfferFull[] = [
   {
@@ -7,16 +8,16 @@ export const fullOffers: OfferFull[] = [
     type: 'apartment',
     price: 468,
     city: {
-      name: 'Paris',
+      name: 'Amsterdam',
       location: {
-        latitude: 48.85661,
-        longitude: 2.351499,
+        latitude: 52.3909553943508,
+        longitude: 4.85309666406198,
         zoom: 13,
       },
     },
     location: {
-      latitude: 48.868610000000004,
-      longitude: 2.342499,
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
       zoom: 16,
     },
     isFavorite: false,
@@ -30,10 +31,10 @@ export const fullOffers: OfferFull[] = [
       avatarUrl: 'img/avatar-angelina.jpg',
       isPro: true,
     },
-    images: [
+    images: addIdToImages([
       'https://15.design.htmlacademy.pro/static/hotel/6.jpg',
       'https://15.design.htmlacademy.pro/static/hotel/7.jpg',
-    ],
+    ]),
     maxAdults: 4,
   },
   {
@@ -42,16 +43,16 @@ export const fullOffers: OfferFull[] = [
     type: 'hotel',
     price: 140,
     city: {
-      name: 'Paris',
+      name: 'Amsterdam',
       location: {
-        latitude: 48.85661,
-        longitude: 2.351499,
+        latitude: 52.3609553943508,
+        longitude: 4.85309666406198,
         zoom: 13,
       },
     },
     location: {
-      latitude: 48.858610000000006,
-      longitude: 2.330499,
+      latitude: 52.3609553943508,
+      longitude: 4.85309666406198,
       zoom: 16,
     },
     isFavorite: false,
@@ -65,10 +66,10 @@ export const fullOffers: OfferFull[] = [
       avatarUrl: 'img/avatar-john.jpg',
       isPro: false,
     },
-    images: [
-      'https://15.design.htmlacademy.pro/static/hotel/9.jpg',
-      'https://15.design.htmlacademy.pro/static/hotel/10.jpg',
-    ],
+    images: addIdToImages([
+      'https://15.design.htmlacademy.pro/static/hotel/6.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/7.jpg',
+    ]),
     maxAdults: 2,
   },
   {
@@ -77,16 +78,16 @@ export const fullOffers: OfferFull[] = [
     type: 'hotel',
     price: 270,
     city: {
-      name: 'Paris',
+      name: 'Amsterdam',
       location: {
-        latitude: 48.85661,
-        longitude: 2.351499,
+        latitude: 52.3909553943508,
+        longitude: 4.929309666406198,
         zoom: 13,
       },
     },
     location: {
-      latitude: 48.834610000000005,
-      longitude: 2.335499,
+      latitude: 52.3909553943508,
+      longitude: 4.929309666406198,
       zoom: 16,
     },
     isFavorite: false,
@@ -100,10 +101,10 @@ export const fullOffers: OfferFull[] = [
       avatarUrl: 'img/avatar-emma.jpg',
       isPro: true,
     },
-    images: [
-      'https://15.design.htmlacademy.pro/static/hotel/11.jpg',
-      'https://15.design.htmlacademy.pro/static/hotel/12.jpg',
-    ],
+    images: addIdToImages([
+      'https://15.design.htmlacademy.pro/static/hotel/6.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/7.jpg',
+    ]),
     maxAdults: 3,
   },
   {
@@ -112,16 +113,16 @@ export const fullOffers: OfferFull[] = [
     type: 'hotel',
     price: 230,
     city: {
-      name: 'Paris',
+      name: 'Amsterdam',
       location: {
-        latitude: 48.85661,
-        longitude: 2.351499,
+        latitude: 52.3809553943508,
+        longitude: 4.939309666406198,
         zoom: 13,
       },
     },
     location: {
-      latitude: 48.85761,
-      longitude: 2.358499,
+      latitude: 52.3809553943508,
+      longitude: 4.939309666406198,
       zoom: 16,
     },
     isFavorite: false,
@@ -135,10 +136,10 @@ export const fullOffers: OfferFull[] = [
       avatarUrl: 'img/avatar-carlos.jpg',
       isPro: false,
     },
-    images: [
-      'https://15.design.htmlacademy.pro/static/hotel/13.jpg',
-      'https://15.design.htmlacademy.pro/static/hotel/14.jpg',
-    ],
+    images: addIdToImages([
+      'https://15.design.htmlacademy.pro/static/hotel/6.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/7.jpg',
+    ]),
     maxAdults: 5,
   },
   {
@@ -147,16 +148,16 @@ export const fullOffers: OfferFull[] = [
     type: 'house',
     price: 605,
     city: {
-      name: 'Paris',
+      name: 'Amsterdam',
       location: {
-        latitude: 48.85661,
-        longitude: 2.351499,
+        latitude: 52.3709553943508,
+        longitude: 4.914309666406198,
         zoom: 13,
       },
     },
     location: {
-      latitude: 48.87561,
-      longitude: 2.375499,
+      latitude: 52.3709553943508,
+      longitude: 4.914309666406198,
       zoom: 16,
     },
     isFavorite: false,
@@ -170,10 +171,10 @@ export const fullOffers: OfferFull[] = [
       avatarUrl: 'img/avatar-marco.jpg',
       isPro: true,
     },
-    images: [
-      'https://15.design.htmlacademy.pro/static/hotel/15.jpg',
-      'https://15.design.htmlacademy.pro/static/hotel/16.jpg',
-    ],
+    images: addIdToImages([
+      'https://15.design.htmlacademy.pro/static/hotel/6.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/7.jpg',
+    ]),
     maxAdults: 6,
   },
 ];

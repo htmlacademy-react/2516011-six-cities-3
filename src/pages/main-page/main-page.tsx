@@ -4,6 +4,7 @@ import SortForm from '../../components/sort-form/sort-form';
 import { SortOptions } from '../../utils/const';
 import OfferList from '../../components/offer/offer-list/offer-list';
 import {OfferShort} from '../../types/offer.ts';
+import Map from '../../components/map/Map.tsx';
 
 interface MainPageProps {
   rentalOffersCount: number;
@@ -38,7 +39,8 @@ function MainPage({ rentalOffersCount, offers }: MainPageProps) {
                 </div>
               </section>
             )}
-            <div className="cities__right-section">{hasOffers && <section className="cities__map map"></section>}</div>
+            <div className="cities__right-section">{hasOffers && <Map offers={offers} />}
+            </div>
           </div>
         </div>
       </main>
