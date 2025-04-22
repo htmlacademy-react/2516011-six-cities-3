@@ -31,7 +31,7 @@ function ReviewsForm() {
       </label>
 
       <div className="reviews__rating-form form__rating">
-        {[...RATINGS].reverse().map(({ value, title }) => (
+        {[...RATINGS].map(({ value, title }) => (
           <React.Fragment key={value}>
             <input
               className="form__rating-input visually-hidden"
