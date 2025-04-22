@@ -9,10 +9,10 @@ interface MapProps {
 }
 
 const Map: React.FC<MapProps> = ({ offers }) => {
-  const mapRef = useRef<HTMLDivElement | null>(null);
+  const mapRef = useRef<HTMLDivElement>(null);
 
   const cityLocation = offers[0].city.location;
-  const map = useMap(mapRef, cityLocation);
+  const map = useMap(mapRef as React.MutableRefObject<HTMLElement>, cityLocation);
 
   useEffect(() => {
     if (map) {
@@ -25,7 +25,7 @@ const Map: React.FC<MapProps> = ({ offers }) => {
     }
   }, [offers, map]);
 
-  return <section className="cities__map map" ref={mapRef} style={{ height: '100%' }}></section>;
+  return <section className="cities__map map" ref={mapRef} style={{ height: '100%' }} />;
 };
 
 export default Map;
