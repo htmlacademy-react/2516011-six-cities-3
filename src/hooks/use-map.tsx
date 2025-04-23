@@ -1,36 +1,26 @@
-import { useEffect, useState, MutableRefObject } from 'react';
-import { Map, TileLayer } from 'leaflet';
-import { Location } from '../types/offer';
+import { useEffect, useRef, MutableRefObject } from 'react';
+import L, { Map } from 'leaflet';
+import { CityLocation } from '../types/offer';
 
-function useMap(mapRef: MutableRefObject<HTMLElement>, location: Location): Map | null {
-  const [map, setMap] = useState<Map | null>(null);
+export function useMap(mapRef: MutableRefObject<HTMLElement>, location: CityLocation) {
+  const mapInstanceRef = useRef<Map | null>(null);
 
   useEffect(() => {
-    if (mapRef.current) {
-      const mapInstance = new Map(mapRef.current, {
+    if (mapRef.current && !mapInstanceRef.current) {
+      mapInstanceRef.current = L.map(mapRef.current, {
         center: [location.latitude, location.longitude],
         zoom: location.zoom,
       });
 
-      const tileLayer = new TileLayer(
+      L.tileLayer(
         'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
         {
           attribution:
             '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
         }
-      );
-
-      mapInstance.addLayer(tileLayer);
-
-      setMap(mapInstance);
-
-      return () => {
-        mapInstance.remove();
-      };
+      ).addTo(mapInstanceRef.current);
     }
   }, [mapRef, location]);
 
-  return map;
+  return mapInstanceRef;
 }
-
-export default useMap;
