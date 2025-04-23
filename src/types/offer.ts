@@ -44,5 +44,3 @@ export interface OfferFull extends BaseOffer {
   images: Image[];
   maxAdults: number;
 }
-
-export type OffersList = OfferShort[];
