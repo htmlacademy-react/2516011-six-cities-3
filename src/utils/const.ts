@@ -1,7 +1,5 @@
 import { City } from '../types/offer';
 
-const RENTAL_OFFERS_COUNT = 312;
-
 const RATING_MULTIPLIER = 20;
 
 const cityData: { [key: string]: City } = {
@@ -84,4 +82,4 @@ enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-export {RENTAL_OFFERS_COUNT, RATING_MULTIPLIER, cityData, RATINGS, SortOptions, AppRoutes, AuthorizationStatus};
+export {RATING_MULTIPLIER, cityData, RATINGS, SortOptions, AppRoutes, AuthorizationStatus};
