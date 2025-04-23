@@ -1,4 +1,4 @@
-export interface Location {
+export interface CityLocation {
   latitude: number;
   longitude: number;
   zoom: number;
@@ -6,7 +6,7 @@ export interface Location {
 
 export interface City {
   name: string;
-  location: Location;
+  location: CityLocation;
 }
 
 export interface Host {
@@ -15,13 +15,18 @@ export interface Host {
   isPro: boolean;
 }
 
+interface Image {
+  id: string;
+  url: string;
+}
+
 export interface BaseOffer {
   id: string;
   title: string;
   type: string;
   price: number;
   city: City;
-  location: Location;
+  location: CityLocation;
   isFavorite: boolean;
   isPremium: boolean;
   rating: number;
@@ -36,8 +41,6 @@ export interface OfferFull extends BaseOffer {
   bedrooms: number;
   goods: string[];
   host: Host;
-  images: { id: string; url: string }[];
+  images: Image[];
   maxAdults: number;
 }
-
-export type OffersList = OfferShort[];

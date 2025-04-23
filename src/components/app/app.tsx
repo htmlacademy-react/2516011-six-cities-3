@@ -11,20 +11,19 @@ import {OfferFull, OfferShort} from '../../types/offer.ts';
 import {Review} from '../../types/reviews.ts';
 
 interface AppProps {
-  rentalOffersCount: number;
   fullOffers: OfferFull[];
   offers: OfferShort[];
   favoritePlaces?: OfferShort[];
   reviews?: Review[];
 }
 
-function App({rentalOffersCount, fullOffers, offers, favoritePlaces = [], reviews = []}: AppProps) {
+function App({fullOffers, offers, favoritePlaces = [], reviews = []}: AppProps) {
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoutes.MAIN}
-          element={<MainPage rentalOffersCount={rentalOffersCount} offers={offers}/>}
+          element={<MainPage/>}
         />
         <Route
           path={AppRoutes.LOGIN}
