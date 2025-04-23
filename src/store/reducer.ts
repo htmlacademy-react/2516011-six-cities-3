@@ -1,22 +1,17 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { changeCity, setOffers } from './action';
-import { City, OffersList } from '../types/offer';
+import { City, OfferShort } from '../types/offer';
+import { cityData } from '../utils/const';
+import { offers } from '../mocks/offers';
 
 interface OffersState {
   city: City;
-  offers: OffersList;
+  offers: OfferShort[];
 }
 
 const initialState: OffersState = {
-  city: {
-    name: 'Paris',
-    location: {
-      latitude: 48.8566,
-      longitude: 2.3522,
-      zoom: 12,
-    },
-  },
-  offers: [],
+  city: cityData['Paris'],
+  offers: offers,
 };
 
 const reducer = createReducer(initialState, (builder) => {

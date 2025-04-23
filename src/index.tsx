@@ -8,8 +8,6 @@ import { offers } from './mocks/offers.ts';
 import { reviews } from './mocks/reviews.ts';
 import { store } from './store';
 
-import { RENTAL_OFFERS_COUNT } from './utils/const';
-
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
@@ -18,7 +16,6 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <App
-        rentalOffersCount={RENTAL_OFFERS_COUNT}
         offers={offers}
         favoritePlaces={favoritePlaces}
         fullOffers={fullOffers}

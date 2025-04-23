@@ -1,18 +1,20 @@
+import { useAppSelector } from '../../hooks';
 import Header from '../../components/header/header';
 import CitiesNavigation from '../../components/cities-navigation/cities-navigation';
 import SortForm from '../../components/sort-form/sort-form';
 import { SortOptions } from '../../utils/const';
 import OfferList from '../../components/offer/offer-list/offer-list';
-import {OfferShort} from '../../types/offer.ts';
 import Map from '../../components/map/Map.tsx';
 
-interface MainPageProps {
-  rentalOffersCount: number;
-  offers: OfferShort[];
-}
+function MainPage() {
+  const currentCity = useAppSelector((state) => state.city.name);
+  const currentCityLocation = useAppSelector((state) => state.city.location);
+  const allOffers = useAppSelector((state) => state.offers);
 
-function MainPage({ rentalOffersCount, offers }: MainPageProps) {
-  const hasOffers = offers.length > 0;
+  const filteredOffers = allOffers.filter((offer) => offer.city.name === currentCity);
+
+  const rentalOffersCount = filteredOffers.length;
+  const hasOffers = rentalOffersCount > 0;
 
   return (
     <div className="page page--gray page--main">
@@ -25,22 +27,21 @@ function MainPage({ rentalOffersCount, offers }: MainPageProps) {
             {hasOffers ? (
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
-                <b className="places__found">{rentalOffersCount} places to stay in Amsterdam</b>
+                <b className="places__found">{rentalOffersCount} places to stay in {currentCity}</b>
                 <SortForm currentSort={SortOptions.Popular} />
-                <OfferList offers={offers} />
+                <OfferList offers={filteredOffers} />
               </section>
             ) : (
               <section className="cities__no-places">
                 <div className="cities__status-wrapper tabs__content">
                   <b className="cities__status">No places to stay available</b>
                   <p className="cities__status-description">
-                    We could not find any property available at the moment in Amsterdam
+                    We could not find any property available at the moment in {currentCity}
                   </p>
                 </div>
               </section>
             )}
-            <div className="cities__right-section">{hasOffers && <Map offers={offers} />}
-            </div>
+            <div className="cities__right-section">{hasOffers && <Map offers={filteredOffers} cityLocation={currentCityLocation} />}</div>
           </div>
         </div>
       </main>
