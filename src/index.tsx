@@ -6,6 +6,7 @@ import { favoritePlaces } from './mocks/favorite-places.ts';
 import { fullOffers } from './mocks/fullOffers.ts';
 import { reviews } from './mocks/reviews.ts';
 import { store } from './store';
+import ErrorMessage from './components/error-message/error-message.tsx';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -14,6 +15,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
+      <ErrorMessage />
       <App
         favoritePlaces={favoritePlaces}
         fullOffers={fullOffers}
