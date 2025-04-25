@@ -2,6 +2,8 @@ import { City } from '../types/offer';
 
 export const RATING_MULTIPLIER = 20;
 
+export const TIMEOUT_SHOW_ERROR = 2000;
+
 export const cityData: { [key: string]: City } = {
   'Paris': {
     name: 'Paris',
