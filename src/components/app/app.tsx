@@ -12,12 +12,11 @@ import {Review} from '../../types/reviews.ts';
 
 interface AppProps {
   fullOffers: OfferFull[];
-  offers: OfferShort[];
   favoritePlaces?: OfferShort[];
   reviews?: Review[];
 }
 
-function App({fullOffers, offers, favoritePlaces = [], reviews = []}: AppProps) {
+function App({fullOffers, favoritePlaces = [], reviews = []}: AppProps) {
   return (
     <BrowserRouter>
       <Routes>
@@ -35,7 +34,6 @@ function App({fullOffers, offers, favoritePlaces = [], reviews = []}: AppProps) 
             {
               <OfferPage
                 fullOffers={fullOffers}
-                offers={offers}
                 reviews={reviews}
               />
             }

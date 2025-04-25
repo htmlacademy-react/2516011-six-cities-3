@@ -1,8 +1,8 @@
 import { City } from '../types/offer';
 
-const RATING_MULTIPLIER = 20;
+export const RATING_MULTIPLIER = 20;
 
-const cityData: { [key: string]: City } = {
+export const cityData: { [key: string]: City } = {
   'Paris': {
     name: 'Paris',
     location: {
@@ -53,7 +53,7 @@ const cityData: { [key: string]: City } = {
   },
 };
 
-const RATINGS = [
+export const RATINGS = [
   { value: 5, title: 'perfect' },
   { value: 4, title: 'good' },
   { value: 3, title: 'not bad' },
@@ -61,14 +61,14 @@ const RATINGS = [
   { value: 1, title: 'terribly' },
 ];
 
-enum SortOptions {
+export enum SortOptions {
   Popular = 'Popular',
   PriceLowToHigh = 'Price: low to high',
   PriceHighToLow = 'Price: high to low',
   TopRatedFirst = 'Top rated first',
 }
 
-enum AppRoutes {
+export enum AppRoutes {
   MAIN = '/',
   LOGIN = '/login',
   FAVORITES = '/favorites',
@@ -76,10 +76,16 @@ enum AppRoutes {
   NOT_FOUND = '*',
 }
 
-enum AuthorizationStatus {
+export enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
 }
 
-export {RATING_MULTIPLIER, cityData, RATINGS, SortOptions, AppRoutes, AuthorizationStatus};
+export enum APIRoutes {
+  Offers = '/offers',
+  Favorite = '/favorite',
+  Comments = '/comments',
+  Login = '/login',
+  Logout = '/logout',
+}
