@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, MutableRefObject } from 'react';
+import { useEffect, useRef, MutableRefObject } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { OfferShort, CityLocation } from '../../types/offer';
@@ -9,7 +9,7 @@ interface MapProps {
   cityLocation: CityLocation;
 }
 
-const Map: React.FC<MapProps> = ({ offers, cityLocation }) => {
+function Map({ offers, cityLocation }: MapProps) {
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useMap(mapRef as MutableRefObject<HTMLElement>, cityLocation);
   const markersRef = useRef<L.Marker[]>([]);
@@ -38,6 +38,6 @@ const Map: React.FC<MapProps> = ({ offers, cityLocation }) => {
   }, [offers, mapInstanceRef]);
 
   return <section className="cities__map map" ref={mapRef} style={{ height: '100%' }} />;
-};
+}
 
 export default Map;
