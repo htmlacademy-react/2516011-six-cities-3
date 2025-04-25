@@ -1,16 +1,18 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeCity, setOffers } from './action';
+import {changeCity, setError, setOffers} from './action';
 import { City, OfferShort } from '../types/offer';
 import { cityData } from '../utils/const';
 
 interface OffersState {
   city: City;
   offers: OfferShort[];
+  error: string | null;
 }
 
 const initialState: OffersState = {
   city: cityData['Paris'],
   offers: [],
+  error: null,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -20,6 +22,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setOffers, (state, action) => {
       state.offers = action.payload;
+    })
+    .addCase(setError, (state, action) => {
+      state.error = action.payload;
     });
 });
 
