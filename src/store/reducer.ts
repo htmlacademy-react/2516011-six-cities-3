@@ -2,7 +2,6 @@ import { createReducer } from '@reduxjs/toolkit';
 import { changeCity, setOffers } from './action';
 import { City, OfferShort } from '../types/offer';
 import { cityData } from '../utils/const';
-import { offers } from '../mocks/offers';
 
 interface OffersState {
   city: City;
@@ -11,7 +10,7 @@ interface OffersState {
 
 const initialState: OffersState = {
   city: cityData['Paris'],
-  offers: offers,
+  offers: [],
 };
 
 const reducer = createReducer(initialState, (builder) => {
