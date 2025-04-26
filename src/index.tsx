@@ -1,12 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
+import ErrorMessage from './components/error-message/error-message';
+
 import { Provider } from 'react-redux';
-import { favoritePlaces } from './mocks/favorite-places.ts';
-import { fullOffers } from './mocks/fullOffers.ts';
-import { reviews } from './mocks/reviews.ts';
+import { favoritePlaces } from './mocks/favorite-places';
+import { fullOffers } from './mocks/fullOffers';
+import { reviews } from './mocks/reviews';
 import { store } from './store';
-import ErrorMessage from './components/error-message/error-message.tsx';
+import { fetchOffersAction } from './store/api-actions';
+
+store.dispatch(fetchOffersAction());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

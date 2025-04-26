@@ -1,5 +1,5 @@
 import {useAppSelector} from '../../hooks';
-import './error-message.css';
+import './error-message.style.scss';
 
 function ErrorMessage(){
   const error = useAppSelector((state) => state.error);
