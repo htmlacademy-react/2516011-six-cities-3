@@ -12,18 +12,21 @@ import OfferHost from '../../components/offer/offer-host/offer-host';
 import OfferReviews from '../../components/offer/offer-reviews/offer-reviews';
 import OfferMap from '../../components/offer/offer-map/offer-map';
 import ReviewsForm from '../../components/offer/offer-reviews-form/offer-reviews-form';
-import NearPlaces from '../../components/offer/offer-near-places/offer-near-places';
+//import NearPlaces from '../../components/offer/offer-near-places/offer-near-places';
 
-import { OfferFull, OfferShort } from '../../types/offer';
+import { OfferFull } from '../../types/offer';
 import { Review } from '../../types/reviews';
 
 interface Props {
   fullOffers: OfferFull[];
-  offers: OfferShort[];
   reviews: Review[];
+  /*offers: OfferShort[];
+  * Тут я сохраню сигнатурку для себя, чтобы потом не забыть добавить
+  * OffersNearby уже через Redux. А пока оно только мешает
+  * */
 }
 
-function OfferPage({fullOffers, offers, reviews}: Props) {
+function OfferPage({fullOffers, reviews}: Props) {
   const { id } = useParams();
 
   if (!id) {
@@ -59,7 +62,7 @@ function OfferPage({fullOffers, offers, reviews}: Props) {
           <OfferMap location={selectedOffer.location}/>
         </section>
         <div className="container">
-          <NearPlaces offers={offers}/>
+          {/*<NearPlaces offers={offers}/>*/}
         </div>
       </main>
     </div>

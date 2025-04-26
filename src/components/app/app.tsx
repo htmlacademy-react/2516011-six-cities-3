@@ -1,10 +1,12 @@
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import { useAppSelector } from '../../hooks';
 import {AppRoutes, AuthorizationStatus} from '../../utils/const';
 import MainPage from '../../pages/main-page/main-page';
 import LoginPage from '../../pages/login-page/login-page';
 import FavoritesPage from '../../pages/favorites-page/favorites-page';
 import OfferPage from '../../pages/offer-page/offer-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
+import Spinner from '../spinner/spinner';
 import PrivateRoute from '../private-route/private-route';
 
 import {OfferFull, OfferShort} from '../../types/offer.ts';
@@ -12,12 +14,19 @@ import {Review} from '../../types/reviews.ts';
 
 interface AppProps {
   fullOffers: OfferFull[];
-  offers: OfferShort[];
   favoritePlaces?: OfferShort[];
   reviews?: Review[];
 }
 
-function App({fullOffers, offers, favoritePlaces = [], reviews = []}: AppProps) {
+function App({fullOffers, favoritePlaces = [], reviews = []}: AppProps) {
+  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
+
+  if (isOffersDataLoading) {
+    return (
+      <Spinner />
+    );
+  }
+
   return (
     <BrowserRouter>
       <Routes>
@@ -35,7 +44,6 @@ function App({fullOffers, offers, favoritePlaces = [], reviews = []}: AppProps) 
             {
               <OfferPage
                 fullOffers={fullOffers}
-                offers={offers}
                 reviews={reviews}
               />
             }
