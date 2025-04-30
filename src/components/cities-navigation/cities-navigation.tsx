@@ -5,7 +5,7 @@ import { changeCity } from '../../store/action';
 import { cityData } from '../../utils/const';
 
 function CitiesNavigation() {
-  const currentCity = useAppSelector((state) => state.city.name);
+  const currentCity = useAppSelector((state) => state.cityOffers.city.name);
 
   const dispatch = useAppDispatch();
 

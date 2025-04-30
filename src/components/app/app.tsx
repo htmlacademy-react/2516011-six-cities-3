@@ -9,8 +9,8 @@ import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import Spinner from '../spinner/spinner';
 import PrivateRoute from '../private-route/private-route';
 
-import {OfferFull, OfferShort} from '../../types/offer.ts';
-import {Review} from '../../types/reviews.ts';
+import { OfferFull, OfferShort } from '../../types/offer.ts';
+import { Review } from '../../types/reviews.ts';
 
 interface AppProps {
   fullOffers: OfferFull[];
@@ -19,9 +19,11 @@ interface AppProps {
 }
 
 function App({fullOffers, favoritePlaces = [], reviews = []}: AppProps) {
-  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
+  const authorizationStatus = useAppSelector((state) => state.authorization.authorizationStatus);
+  const isOffersDataLoading = useAppSelector((state) => state.cityOffers.isOffersDataLoading);
 
-  if (isOffersDataLoading) {
+  if (authorizationStatus === AuthorizationStatus.Unknown
+    || isOffersDataLoading) {
     return (
       <Spinner />
     );
@@ -52,7 +54,7 @@ function App({fullOffers, favoritePlaces = [], reviews = []}: AppProps) {
           path={AppRoutes.FAVORITES}
           element={
             <PrivateRoute
-              authorizationStatus={AuthorizationStatus.Auth}
+              authorizationStatus={authorizationStatus}
             >
               <FavoritesPage favoritePlaces={favoritePlaces}/>
             </PrivateRoute>
