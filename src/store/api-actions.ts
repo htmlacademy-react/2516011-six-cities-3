@@ -1,13 +1,12 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state';
-import { requireAuthorization, setUserData } from './action';
 import { saveToken, dropToken } from '../services/token';
 import { OfferShort } from '../types/offer';
-import { setError, setOffers, setOffersDataLoadingStatus } from './action';
+import { requireAuthorization, setUserData, setError, setOffers, setOffersDataLoadingStatus, redirectToRoute } from './action';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
-import { APIRoutes, AuthorizationStatus, TIMEOUT_SHOW_ERROR } from '../utils/const';
+import { APIRoutes, AuthorizationStatus, AppRoutes, TIMEOUT_SHOW_ERROR } from '../utils/const';
 import { store } from './';
 
 export const clearErrorAction = createAsyncThunk(
@@ -64,6 +63,7 @@ export const loginAction = createAsyncThunk<void, AuthData, {
       saveToken(token);
       dispatch(requireAuthorization(AuthorizationStatus.Auth));
       dispatch(setUserData(user));
+      dispatch(redirectToRoute(AppRoutes.MAIN));
     } catch (error) {
       dispatch(setError('Ошибка при авторизации'));
     }
