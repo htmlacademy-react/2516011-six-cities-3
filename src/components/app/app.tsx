@@ -1,4 +1,4 @@
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import { useAppSelector } from '../../hooks';
 import {AppRoutes, AuthorizationStatus} from '../../utils/const';
 import MainPage from '../../pages/main-page/main-page';
@@ -8,6 +8,8 @@ import OfferPage from '../../pages/offer-page/offer-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import Spinner from '../spinner/spinner';
 import PrivateRoute from '../private-route/private-route';
+import HistoryRouter from '../history-route/history-route';
+import browserHistory from '../../browser-history';
 
 import { OfferFull, OfferShort } from '../../types/offer.ts';
 import { Review } from '../../types/reviews.ts';
@@ -30,7 +32,7 @@ function App({fullOffers, favoritePlaces = [], reviews = []}: AppProps) {
   }
 
   return (
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route
           path={AppRoutes.MAIN}
@@ -65,7 +67,7 @@ function App({fullOffers, favoritePlaces = [], reviews = []}: AppProps) {
           element={<NotFoundPage/>}
         />
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
 
