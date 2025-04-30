@@ -7,9 +7,9 @@ import OfferList from '../../components/offer/offer-list/offer-list';
 import Map from '../../components/map/Map.tsx';
 
 function MainPage() {
-  const currentCity = useAppSelector((state) => state.city.name);
-  const currentCityLocation = useAppSelector((state) => state.city.location);
-  const allOffers = useAppSelector((state) => state.offers);
+  const currentCity = useAppSelector((state) => state.cityOffers.city.name);
+  const currentCityLocation = useAppSelector((state) => state.cityOffers.city.location);
+  const allOffers = useAppSelector((state) => state.cityOffers.offers);
 
   const filteredOffers = allOffers.filter((offer) => offer.city.name === currentCity);
 
