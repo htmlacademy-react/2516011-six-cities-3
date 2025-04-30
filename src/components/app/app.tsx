@@ -21,7 +21,7 @@ interface AppProps {
 }
 
 function App({fullOffers, favoritePlaces = [], reviews = []}: AppProps) {
-  const authorizationStatus = useAppSelector((state) => state.authorization.authorizationStatus);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const isOffersDataLoading = useAppSelector((state) => state.cityOffers.isOffersDataLoading);
 
   if (authorizationStatus === AuthorizationStatus.Unknown

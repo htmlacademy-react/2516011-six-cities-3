@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import {changeCity, setError, setOffers, setOffersDataLoadingStatus, requireAuthorization, setUserData} from './action';
+import {changeCity, setOffers, setOffersDataLoadingStatus, requireAuthorization, setUserData} from './action';
 import { City, OfferShort } from '../types/offer';
 import { AuthorizationStatus } from '../utils/const';
 import { cityData } from '../utils/const';
@@ -11,14 +11,9 @@ export interface CityOffersState {
   isOffersDataLoading: boolean;
 }
 
-export interface AuthorizationState {
-  authorizationStatus: AuthorizationStatus;
-  error: string | null;
-}
-
 export interface RootState {
   cityOffers: CityOffersState;
-  authorization: AuthorizationState;
+  authorizationStatus: AuthorizationStatus;
   userData: UserData | null;
 }
 
@@ -28,10 +23,7 @@ const initialState: RootState = {
     offers: [],
     isOffersDataLoading: false,
   },
-  authorization: {
-    authorizationStatus: AuthorizationStatus.Unknown,
-    error: null,
-  },
+  authorizationStatus: AuthorizationStatus.Unknown,
   userData: null,
 };
 
@@ -46,11 +38,8 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(setOffersDataLoadingStatus, (state, action) => {
       state.cityOffers.isOffersDataLoading = action.payload;
     })
-    .addCase(setError, (state, action) => {
-      state.authorization.error = action.payload;
-    })
     .addCase(requireAuthorization, (state, action) => {
-      state.authorization.authorizationStatus = action.payload;
+      state.authorizationStatus = action.payload;
     })
     .addCase(setUserData, (state, action) => {
       state.userData = action.payload;

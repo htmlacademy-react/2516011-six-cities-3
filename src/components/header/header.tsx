@@ -7,7 +7,7 @@ function Header() {
   const dispatch = useAppDispatch();
 
   const authorizationStatus = useAppSelector((state) =>
-    state.authorization.authorizationStatus);
+    state.authorizationStatus);
   const userData = useAppSelector((state) => state.userData);
   const isUserLoggedIn = authorizationStatus === AuthorizationStatus.Auth;
   const userName = isUserLoggedIn ? userData?.email : '';
