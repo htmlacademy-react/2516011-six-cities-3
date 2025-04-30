@@ -42,9 +42,10 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
   async (_arg, { dispatch, extra: api }) => {
     try {
       const { data: userData } = await api.get<UserData>(APIRoutes.Login);
-      dispatch(requireAuthorization(AuthorizationStatus.Auth));
       dispatch(setUserData(userData));
+      dispatch(requireAuthorization(AuthorizationStatus.Auth));
     } catch {
+      dispatch(setError(null));
       dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
       dispatch(setUserData(null));
     }
@@ -59,10 +60,10 @@ export const loginAction = createAsyncThunk<void, AuthData, {
   'user/login',
   async ({ email, password }, { dispatch, extra: api }) => {
     try {
-      const { data: { token, user } } = await api.post<{ token: string; user: UserData }>(APIRoutes.Login, { email, password });
+      const {data: {token}} = await api.post<UserData>(APIRoutes.Login, {email, password});
       saveToken(token);
       dispatch(requireAuthorization(AuthorizationStatus.Auth));
-      dispatch(setUserData(user));
+      dispatch(checkAuthAction());
       dispatch(redirectToRoute(AppRoutes.MAIN));
     } catch (error) {
       dispatch(setError('Ошибка при авторизации'));
@@ -80,6 +81,5 @@ export const logoutAction = createAsyncThunk<void, undefined, {
     await api.delete(APIRoutes.Logout);
     dropToken();
     dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
-    dispatch(setUserData(null));
   }
 );

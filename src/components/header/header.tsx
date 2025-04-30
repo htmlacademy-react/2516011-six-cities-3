@@ -6,16 +6,12 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 function Header() {
   const dispatch = useAppDispatch();
 
-  const authorizationStatus = useAppSelector((state) => state.authorization.authorizationStatus);
+  const authorizationStatus = useAppSelector((state) =>
+    state.authorization.authorizationStatus);
   const userData = useAppSelector((state) => state.userData);
-
-  const isUserLoggedIn = authorizationStatus === AuthorizationStatus.Auth && userData !== null;
+  const isUserLoggedIn = authorizationStatus === AuthorizationStatus.Auth;
   const userName = isUserLoggedIn ? userData?.email : '';
   const favoriteCount = 0;
-
-  const handleLogout = () => {
-    dispatch(logoutAction());
-  };
 
   return (
     <header className="header">
@@ -44,7 +40,12 @@ function Header() {
                     </Link>
                   </li>
                   <li className="header__nav-item">
-                    <Link className="header__nav-link" to="#" onClick={handleLogout}>
+                    <Link className="header__nav-link" to="#" onClick=
+                      {(evt) => {
+                        evt.preventDefault();
+                        dispatch(logoutAction());
+                      }}
+                    >
                       <span className="header__signout">Sign out</span>
                     </Link>
                   </li>
