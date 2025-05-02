@@ -5,7 +5,6 @@ import App from './components/app/app';
 import { ToastContainer } from 'react-toastify';
 import { Provider } from 'react-redux';
 import { favoritePlaces } from './mocks/favorite-places';
-import { fullOffers } from './mocks/fullOffers';
 import { reviews } from './mocks/reviews';
 import { store } from './store';
 import { fetchOffersAction } from './store/api-actions';
@@ -25,7 +24,6 @@ root.render(
       <ToastContainer />
       <App
         favoritePlaces={favoritePlaces}
-        fullOffers={fullOffers}
         reviews={reviews}
       />
     </Provider>
