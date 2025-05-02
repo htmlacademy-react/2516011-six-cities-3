@@ -10,7 +10,7 @@ function Header() {
     state.authorizationStatus);
   const userData = useAppSelector((state) => state.userData);
   const isUserLoggedIn = authorizationStatus === AuthorizationStatus.Auth;
-  const userName = isUserLoggedIn ? userData?.email : '';
+  const userName = userData?.email ?? '';
   const favoriteCount = 0;
 
   return (
