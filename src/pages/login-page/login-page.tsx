@@ -28,7 +28,7 @@ function LoginPage() {
 
   useEffect(() => {
     validateForm();
-  }, []);
+  }, [validateForm]);
 
   return (
     <div className="page page--gray page--login">
