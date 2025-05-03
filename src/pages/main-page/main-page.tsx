@@ -1,10 +1,15 @@
+import { useState } from 'react';
 import { useAppSelector } from '../../hooks';
 import Header from '../../components/header/header';
 import CitiesNavigation from '../../components/cities-navigation/cities-navigation';
 import SortForm from '../../components/sort-form/sort-form';
 import { SortOptions } from '../../utils/const';
+import { SortOption } from '../../types/sort.ts';
+import { sortOffers } from '../../utils/sort.ts';
+import { BaseOffer } from '../../types/offer.ts';
 import OfferList from '../../components/offer/offer-list/offer-list';
 import Map from '../../components/map/Map.tsx';
+
 
 function MainPage() {
   const currentCity = useAppSelector((state) => state.cityOffers.city.name);
@@ -12,9 +17,13 @@ function MainPage() {
   const allOffers = useAppSelector((state) => state.cityOffers.offers);
 
   const filteredOffers = allOffers.filter((offer) => offer.city.name === currentCity);
-
   const rentalOffersCount = filteredOffers.length;
   const hasOffers = rentalOffersCount > 0;
+
+  const [currentSort, setCurrentSort] = useState<SortOption>(SortOptions.Popular);
+  const [hoveredOffer, setHoveredOffer] = useState<BaseOffer | undefined>(undefined);
+
+  const sortedOffers = sortOffers(filteredOffers, currentSort);
 
   return (
     <div className="page page--gray page--main">
@@ -28,8 +37,11 @@ function MainPage() {
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
                 <b className="places__found">{rentalOffersCount} places to stay in {currentCity}</b>
-                <SortForm currentSort={SortOptions.Popular} />
-                <OfferList offers={filteredOffers} />
+                <SortForm currentSort={currentSort} onSortChange={setCurrentSort}/>
+                <OfferList
+                  offers={sortedOffers}
+                  onCardHover={setHoveredOffer}
+                />
               </section>
             ) : (
               <section className="cities__no-places">
@@ -41,7 +53,7 @@ function MainPage() {
                 </div>
               </section>
             )}
-            <div className="cities__right-section">{hasOffers && <Map offers={filteredOffers} cityLocation={currentCityLocation} />}</div>
+            <div className="cities__right-section">{hasOffers && <Map offers={filteredOffers} cityLocation={currentCityLocation} currentOffer={hoveredOffer}/>}</div>
           </div>
         </div>
       </main>

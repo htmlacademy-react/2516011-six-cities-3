@@ -1,14 +1,12 @@
-import { useState } from 'react';
 import PlaceCard from '../../../components/place-card/place-card';
-import { OfferShort } from '../../../types/offer.ts';
+import { BaseOffer, OfferShort } from '../../../types/offer.ts';
 
 interface OfferListProps {
   offers: OfferShort[];
+  onCardHover?: (offer: BaseOffer | undefined) => void;
 }
 
-function OfferList({ offers }: OfferListProps) {
-  const [, setActiveOfferId] = useState<string | null>(null);
-
+function OfferList({ offers, onCardHover }: OfferListProps) {
   return (
     <div className="cities__places-list places__list tabs__content">
       {offers.map((offer) => (
@@ -22,8 +20,8 @@ function OfferList({ offers }: OfferListProps) {
           isPremium={offer.isPremium}
           rating={offer.rating}
           previewImage={offer.previewImage || 'default-image.png'}
-          onMouseEnter={setActiveOfferId}
-          onMouseLeave={() => setActiveOfferId(null)}
+          onMouseEnter={() => onCardHover?.(offer)}
+          onMouseLeave={() => onCardHover?.(undefined)}
         />
       ))}
     </div>
