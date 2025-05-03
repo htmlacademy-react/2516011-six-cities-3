@@ -1,4 +1,4 @@
-import { useRef, FormEvent } from 'react';
+import { useRef, FormEvent, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
@@ -7,19 +7,28 @@ import { AppRoutes } from '../../utils/const';
 function LoginPage() {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
-
   const dispatch = useAppDispatch();
+
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  const validateForm = () => {
+    const email = loginRef.current?.value || '';
+    const password = passwordRef.current?.value || '';
+    setIsFormValid(email.trim() !== '' && password.trim() !== '');
+  };
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    if (loginRef.current !== null && passwordRef.current !== null) {
-      dispatch(loginAction({
-        email: loginRef.current.value,
-        password: passwordRef.current.value
-      }));
-    }
+    const email = loginRef.current?.value || '';
+    const password = passwordRef.current?.value || '';
+
+    dispatch(loginAction({ email, password }));
   };
+
+  useEffect(() => {
+    validateForm();
+  }, []);
 
   return (
     <div className="page page--gray page--login">
@@ -28,7 +37,7 @@ function LoginPage() {
           <div className="header__wrapper">
             <div className="header__left">
               <Link className="header__logo-link" to={AppRoutes.MAIN}>
-                <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
+                <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
               </Link>
             </div>
           </div>
@@ -51,6 +60,7 @@ function LoginPage() {
                   placeholder="Email"
                   autoComplete="email"
                   required
+                  onInput={validateForm}
                 />
               </div>
               <div className="login__input-wrapper form__input-wrapper">
@@ -64,11 +74,13 @@ function LoginPage() {
                   placeholder="Password"
                   autoComplete="current-password"
                   required
+                  onInput={validateForm}
                 />
               </div>
               <button
                 className="login__submit form__submit button"
                 type="submit"
+                disabled={!isFormValid}
               >
                 Sign in
               </button>

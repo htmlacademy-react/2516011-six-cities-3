@@ -15,11 +15,6 @@ export interface Host {
   isPro: boolean;
 }
 
-interface Image {
-  id: string;
-  url: string;
-}
-
 export interface BaseOffer {
   id: string;
   title: string;
@@ -41,6 +36,6 @@ export interface OfferFull extends BaseOffer {
   bedrooms: number;
   goods: string[];
   host: Host;
-  images: Image[];
+  images: string[];
   maxAdults: number;
 }

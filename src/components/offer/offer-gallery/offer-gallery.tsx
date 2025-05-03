@@ -1,10 +1,5 @@
-interface Image {
-  id: string;
-  url: string;
-}
-
 interface Props {
-  images: Image[];
+  images: string[];
 }
 
 function OfferGallery({ images }: Props) {
@@ -12,8 +7,8 @@ function OfferGallery({ images }: Props) {
     <div className="offer__gallery-container container">
       <div className="offer__gallery">
         {images.map((image) => (
-          <div className="offer__image-wrapper" key={image.id}>
-            <img className="offer__image" src={image.url} alt="Photo studio" />
+          <div className="offer__image-wrapper" key={image}>
+            <img className="offer__image" src={image} alt="Photo studio" />
           </div>
         ))}
       </div>

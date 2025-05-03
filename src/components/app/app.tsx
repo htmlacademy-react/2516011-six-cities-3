@@ -11,16 +11,15 @@ import PrivateRoute from '../private-route/private-route';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
 
-import { OfferFull, OfferShort } from '../../types/offer.ts';
+import { OfferShort } from '../../types/offer.ts';
 import { Review } from '../../types/reviews.ts';
 
 interface AppProps {
-  fullOffers: OfferFull[];
   favoritePlaces?: OfferShort[];
   reviews?: Review[];
 }
 
-function App({fullOffers, favoritePlaces = [], reviews = []}: AppProps) {
+function App({favoritePlaces = [], reviews = []}: AppProps) {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const isOffersDataLoading = useAppSelector((state) => state.cityOffers.isOffersDataLoading);
 
@@ -47,7 +46,6 @@ function App({fullOffers, favoritePlaces = [], reviews = []}: AppProps) {
           element=
             {
               <OfferPage
-                fullOffers={fullOffers}
                 reviews={reviews}
               />
             }
