@@ -4,7 +4,7 @@ export interface User {
   isPro: boolean;
 }
 
-export interface Review {
+export interface Comment {
   id: string;
   date: string;
   user: User;

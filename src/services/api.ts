@@ -47,6 +47,10 @@ export const createAPI = (): AxiosInstance => {
         return Promise.reject(error);
       }
 
+      if (status === StatusCodes.NOT_FOUND) {
+        return Promise.reject(error);
+      }
+
       if (status && shouldDisplayError(error.response!)) {
         const detailMessage = error.response?.data;
         if (detailMessage?.message) {

@@ -9,7 +9,7 @@ import OfferFeatures from '../../components/offer/offer-features/offer-features'
 import OfferPrice from '../../components/offer/offer-price/offer-price';
 import OfferInside from '../../components/offer/offer-inside/offer-inside';
 import OfferHost from '../../components/offer/offer-host/offer-host';
-import OfferReviews from '../../components/offer/offer-reviews/offer-reviews';
+import OfferComments from '../../components/offer/offer-reviews/offer-comments.tsx';
 import ReviewsForm from '../../components/offer/offer-reviews-form/offer-reviews-form';
 import Map from '../../components/map/Map.tsx';
 import NearPlaces from '../../components/offer/offer-near-places/offer-near-places';
@@ -17,31 +17,27 @@ import Spinner from '../../components/spinner/spinner';
 
 import { AppRoutes } from '../../utils/const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fetchOfferById, fetchNearbyOffers } from '../../store/api-actions';
+import {fetchOfferById, fetchNearbyOffers, fetchComments} from '../../store/api-actions';
 
-import { Review } from '../../types/reviews';
-
-
-interface Props {
-  reviews: Review[];
-}
-
-function OfferPage({ reviews }: Props) {
+function OfferPage() {
   const { id } = useParams<{ id: string }>();
   const dispatch = useAppDispatch();
 
   const offer = useAppSelector((state) => state.currentOffer);
+  const comments = useAppSelector((state) => state.comments);
   const nearbyOffers = useAppSelector((state) => state.nearbyOffers).slice(0, 3);
   const isLoading = useAppSelector((state) => state.isCurrentOfferLoading);
+  const isOfferNotFound = useAppSelector((state) => state.isOfferNotFound);
 
   useEffect(() => {
     if (id) {
       dispatch(fetchOfferById(id));
       dispatch(fetchNearbyOffers(id));
+      dispatch(fetchComments(id));
     }
   }, [id, dispatch]);
 
-  if (!id) {
+  if (!id || isOfferNotFound) {
     return <Navigate to={AppRoutes.NOT_FOUND} />;
   }
 
@@ -64,8 +60,8 @@ function OfferPage({ reviews }: Props) {
               <OfferInside goods={offer.goods}/>
               <OfferHost host={offer.host} description={offer.description}/>
               <section className="offer__reviews reviews">
-                <OfferReviews reviews={reviews}/>
-                <ReviewsForm/>
+                <OfferComments comments={comments}/>
+                <ReviewsForm offerId={id}/>
               </section>
             </div>
           </div>

@@ -3,13 +3,18 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state';
 import { saveToken, dropToken } from '../services/token';
 import { OfferShort, OfferFull } from '../types/offer';
+import { Comment } from '../types/comment.ts';
 import {
   requireAuthorization,
   setUserData,
   setOffers,
   setOffersDataLoadingStatus,
   redirectToRoute,
-  setCurrentOfferLoading, setCurrentOffer, setNearbyOffers
+  setCurrentOfferLoading,
+  setOfferNotFound,
+  setCurrentOffer,
+  setNearbyOffers,
+  setComments,
 } from './action';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
@@ -82,10 +87,16 @@ export const fetchOfferById = createAsyncThunk<void, string, {
 }>(
   'offer/fetchById',
   async (offerId, { dispatch, extra: api }) => {
-    dispatch(setCurrentOfferLoading(true));
-    const { data } = await api.get<OfferFull>(`/offers/${offerId}`);
-    dispatch(setCurrentOfferLoading(false));
-    dispatch(setCurrentOffer(data));
+    try {
+      dispatch(setCurrentOfferLoading(true));
+      dispatch(setOfferNotFound(false));
+      const { data } = await api.get<OfferFull>(`/offers/${offerId}`);
+      dispatch(setCurrentOffer(data));
+    } catch (error) {
+      dispatch(setOfferNotFound(true));
+    } finally {
+      dispatch(setCurrentOfferLoading(false));
+    }
   }
 );
 
@@ -100,5 +111,37 @@ export const fetchNearbyOffers = createAsyncThunk<void, string, {
     const { data } = await api.get<OfferShort[]>(`/offers/${offerId}/nearby`);
     dispatch(setCurrentOfferLoading(false));
     dispatch(setNearbyOffers(data));
+  }
+);
+
+export const fetchComments = createAsyncThunk<void, string, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'offer/fetchComments',
+  async (offerId, { dispatch, extra: api }) => {
+    const { data } = await api.get<Comment[]>(`/comments/${offerId}`);
+    dispatch(setComments(data));
+  }
+);
+
+type SendCommentPayload = {
+  offerId: string;
+  comment: string;
+  rating: number;
+};
+
+export const postComment = createAsyncThunk<void, SendCommentPayload, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'offer/postComment',
+  async ({ offerId, comment, rating }, { dispatch, extra: api, getState }) => {
+    const { data } = await api.post<Comment>(`/comments/${offerId}`, { comment, rating });
+    const currentComments = getState().comments;
+    const updatedComments = [data, ...currentComments];
+    dispatch(setComments(updatedComments));
   }
 );

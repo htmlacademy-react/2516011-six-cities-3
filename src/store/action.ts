@@ -2,6 +2,7 @@ import { createAction } from '@reduxjs/toolkit';
 import { City, OfferFull, OfferShort } from '../types/offer';
 import { AppRoutes, AuthorizationStatus } from '../utils/const';
 import { UserData } from '../types/user-data';
+import { Comment } from '../types/comment.ts';
 
 export const changeCity = createAction<City>('offers/changeCity');
 export const setOffers = createAction<OfferShort[]>('offers/setOffers');
@@ -13,4 +14,6 @@ export const redirectToRoute = createAction<AppRoutes>('user/redirectToRoute');
 
 export const setCurrentOffer = createAction<OfferFull>('offer/setCurrentOffer');
 export const setCurrentOfferLoading = createAction<boolean>('offer/setCurrentOfferLoading');
+export const setOfferNotFound = createAction<boolean>('offer/setOfferNotFound');
 export const setNearbyOffers = createAction<OfferShort[]>('offer/setNearbyOffers');
+export const setComments = createAction<Comment[]>('offer/setComments');

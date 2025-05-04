@@ -7,12 +7,15 @@ import {
   setUserData,
   setCurrentOffer,
   setCurrentOfferLoading,
+  setOfferNotFound,
   setNearbyOffers,
+  setComments,
 } from './action';
 import { City, OfferFull, OfferShort } from '../types/offer';
 import { AuthorizationStatus } from '../utils/const';
 import { cityData } from '../utils/const';
 import { UserData } from '../types/user-data';
+import { Comment } from '../types/comment.ts';
 
 export interface CityOffersState {
   city: City;
@@ -27,6 +30,9 @@ export interface RootState {
   currentOffer: OfferFull | null;
   nearbyOffers: OfferShort[];
   isCurrentOfferLoading: boolean;
+  isOfferNotFound: boolean;
+  comments: Comment[];
+  isCommentSending: boolean;
 }
 
 const initialState: RootState = {
@@ -38,8 +44,11 @@ const initialState: RootState = {
   authorizationStatus: AuthorizationStatus.Unknown,
   userData: null,
   currentOffer: null,
-  isCurrentOfferLoading: false,
   nearbyOffers: [],
+  isCurrentOfferLoading: false,
+  isOfferNotFound: false,
+  comments: [],
+  isCommentSending: false,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -67,6 +76,12 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setNearbyOffers, (state, action) => {
       state.nearbyOffers = action.payload;
+    })
+    .addCase(setComments, (state, action) => {
+      state.comments = action.payload;
+    })
+    .addCase(setOfferNotFound, (state, action) => {
+      state.isOfferNotFound = action.payload;
     });
 });
 
