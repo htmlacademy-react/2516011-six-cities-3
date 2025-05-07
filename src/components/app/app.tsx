@@ -12,14 +12,12 @@ import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
 
 import { OfferShort } from '../../types/offer.ts';
-import { Review } from '../../types/reviews.ts';
 
 interface AppProps {
   favoritePlaces?: OfferShort[];
-  reviews?: Review[];
 }
 
-function App({favoritePlaces = [], reviews = []}: AppProps) {
+function App({favoritePlaces = [],}: AppProps) {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const isOffersDataLoading = useAppSelector((state) => state.cityOffers.isOffersDataLoading);
 
@@ -45,9 +43,7 @@ function App({favoritePlaces = [], reviews = []}: AppProps) {
           path={`${AppRoutes.OFFER}`}
           element=
             {
-              <OfferPage
-                reviews={reviews}
-              />
+              <OfferPage/>
             }
         />
         <Route
