@@ -1,4 +1,4 @@
-import { useRef, FormEvent, useState, useEffect } from 'react';
+import { useRef, FormEvent, useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
@@ -11,11 +11,11 @@ function LoginPage() {
 
   const [isFormValid, setIsFormValid] = useState(false);
 
-  const validateForm = () => {
+  const validateForm = useCallback(() => {
     const email = loginRef.current?.value || '';
     const password = passwordRef.current?.value || '';
     setIsFormValid(email.trim() !== '' && password.trim() !== '');
-  };
+  }, []);
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -28,7 +28,7 @@ function LoginPage() {
 
   useEffect(() => {
     validateForm();
-  }, []);
+  }, [validateForm]);
 
   return (
     <div className="page page--gray page--login">
