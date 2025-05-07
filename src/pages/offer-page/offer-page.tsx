@@ -21,7 +21,6 @@ import { fetchOfferById, fetchNearbyOffers } from '../../store/api-actions';
 
 import { Review } from '../../types/reviews';
 
-
 interface Props {
   reviews: Review[];
 }
