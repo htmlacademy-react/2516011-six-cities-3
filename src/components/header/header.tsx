@@ -7,8 +7,10 @@ function Header() {
   const dispatch = useAppDispatch();
 
   const authorizationStatus = useAppSelector((state) =>
-    state.authorizationStatus);
-  const userData = useAppSelector((state) => state.userData);
+    state.user.authorizationStatus
+  );
+  const userData = useAppSelector((state) => state.user.userData);
+
   const isUserLoggedIn = authorizationStatus === AuthorizationStatus.Auth;
   const userName = userData?.email ?? '';
   const favoriteCount = 0;

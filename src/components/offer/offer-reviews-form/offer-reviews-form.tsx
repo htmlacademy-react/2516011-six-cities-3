@@ -15,7 +15,7 @@ function ReviewsForm({ offerId }: ReviewsFormProps) {
   const [reviewText, setReviewText] = useState('');
   const [rating, setRating] = useState<number | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector((state) => state.user.authorizationStatus);
   const isAuthorized = authorizationStatus === AuthorizationStatus.Auth;
 
   const isValid = rating !== null && reviewText.length >= 50 && reviewText.length <= 300;

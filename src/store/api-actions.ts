@@ -1,24 +1,26 @@
-import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { AxiosInstance } from 'axios';
 import { AppDispatch, State } from '../types/state';
 import { saveToken, dropToken } from '../services/token';
 import { OfferShort, OfferFull } from '../types/offer';
-import { Comment } from '../types/comment.ts';
+import { Comment } from '../types/comment';
+import { AuthData } from '../types/auth-data';
+import { UserData } from '../types/user-data';
+import { APIRoutes, AuthorizationStatus, AppRoutes } from '../utils/const';
+
+import { setOffers, setOffersDataLoadingStatus } from './city-offers/city-offers';
 import {
   requireAuthorization,
-  setUserData,
-  setOffers,
-  setOffersDataLoadingStatus,
-  redirectToRoute,
+  setUserData
+} from './user/user';
+import {
   setCurrentOfferLoading,
   setOfferNotFound,
   setCurrentOffer,
   setNearbyOffers,
-  setComments,
-} from './action';
-import { AuthData } from '../types/auth-data';
-import { UserData } from '../types/user-data';
-import { APIRoutes, AuthorizationStatus, AppRoutes } from '../utils/const';
+  setComments
+} from './offer/offer';
+import { redirectToRoute } from './action';
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
@@ -59,7 +61,7 @@ export const loginAction = createAsyncThunk<void, AuthData, {
 }>(
   'user/login',
   async ({ email, password }, { dispatch, extra: api }) => {
-    const {data: {token}} = await api.post<UserData>(APIRoutes.Login, {email, password});
+    const { data: { token } } = await api.post<UserData>(APIRoutes.Login, { email, password });
     saveToken(token);
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
     dispatch(checkAuthAction());
@@ -92,7 +94,7 @@ export const fetchOfferById = createAsyncThunk<void, string, {
       dispatch(setOfferNotFound(false));
       const { data } = await api.get<OfferFull>(`/offers/${offerId}`);
       dispatch(setCurrentOffer(data));
-    } catch (error) {
+    } catch {
       dispatch(setOfferNotFound(true));
     } finally {
       dispatch(setCurrentOfferLoading(false));
@@ -140,7 +142,7 @@ export const postComment = createAsyncThunk<void, SendCommentPayload, {
   'offer/postComment',
   async ({ offerId, comment, rating }, { dispatch, extra: api, getState }) => {
     const { data } = await api.post<Comment>(`/comments/${offerId}`, { comment, rating });
-    const currentComments = getState().comments;
+    const currentComments = getState().offer.comments;
     const updatedComments = [data, ...currentComments];
     dispatch(setComments(updatedComments));
   }
