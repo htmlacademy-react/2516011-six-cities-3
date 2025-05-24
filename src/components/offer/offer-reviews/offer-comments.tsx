@@ -5,7 +5,9 @@ interface Props {
 }
 
 function OfferComments({ comments }: Props) {
-  const displayedComments = comments.slice(0, 10);
+
+  const sortedComments = [...comments].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  const displayedComments = sortedComments.slice(0, 10);
 
   return (
     <section className="offer__reviews reviews">
