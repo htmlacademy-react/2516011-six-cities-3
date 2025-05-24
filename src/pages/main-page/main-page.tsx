@@ -40,7 +40,7 @@ function MainPage() {
                 <SortForm currentSort={currentSort} onSortChange={setCurrentSort}/>
                 <OfferList
                   offers={sortedOffers}
-                  onCardHover={setHoveredOffer}
+                  onCardSelect={setHoveredOffer}
                 />
               </section>
             ) : (
