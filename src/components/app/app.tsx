@@ -18,7 +18,7 @@ interface AppProps {
 }
 
 function App({favoritePlaces = [],}: AppProps) {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector((state) => state.user.authorizationStatus);
   const isOffersDataLoading = useAppSelector((state) => state.cityOffers.isOffersDataLoading);
 
   if (authorizationStatus === AuthorizationStatus.Unknown

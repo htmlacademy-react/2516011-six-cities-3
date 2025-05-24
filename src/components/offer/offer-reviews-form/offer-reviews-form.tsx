@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { postComment } from '../../../store/api-actions';
 import { RATINGS, AuthorizationStatus } from '../../../utils/const';
@@ -15,8 +15,7 @@ function ReviewsForm({ offerId }: ReviewsFormProps) {
   const [reviewText, setReviewText] = useState('');
   const [rating, setRating] = useState<number | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const isAuthorized = authorizationStatus === AuthorizationStatus.Auth;
+  const isAuthorized = useAppSelector((state) => state.user.authorizationStatus === AuthorizationStatus.Auth);
 
   const isValid = rating !== null && reviewText.length >= 50 && reviewText.length <= 300;
 
@@ -28,34 +27,31 @@ function ReviewsForm({ offerId }: ReviewsFormProps) {
     setRating(Number(event.target.value));
   };
 
-  const handleSubmit = useCallback(
-    (event: React.FormEvent) => {
-      event.preventDefault();
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
 
-      if (isValid) {
-        setIsSubmitting(true);
+    if (isValid) {
+      setIsSubmitting(true);
 
-        dispatch(postComment({
-          offerId,
-          comment: reviewText,
-          rating: rating !== null ? rating : 0
-        }))
-          .unwrap()
-          .then(() => {
-            setReviewText('');
-            setRating(null);
-            toast.success('Отзыв успешно отправлен!');
-          })
-          .catch(() => {
-            toast.error('Не удалось отправить отзыв. Пожалуйста, попробуйте снова.');
-          })
-          .finally(() => {
-            setIsSubmitting(false);
-          });
-      }
-    },
-    [dispatch, offerId, reviewText, rating, isValid]
-  );
+      dispatch(postComment({
+        offerId,
+        comment: reviewText,
+        rating: rating ?? 0,
+      }))
+        .unwrap()
+        .then(() => {
+          setReviewText('');
+          setRating(null);
+          toast.success('Отзыв успешно отправлен!');
+        })
+        .catch(() => {
+          toast.error('Не удалось отправить отзыв. Пожалуйста, попробуйте снова.');
+        })
+        .finally(() => {
+          setIsSubmitting(false);
+        });
+    }
+  };
 
   if (!isAuthorized) {
     return null;

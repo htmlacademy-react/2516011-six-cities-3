@@ -23,11 +23,11 @@ function OfferPage() {
   const { id } = useParams<{ id: string }>();
   const dispatch = useAppDispatch();
 
-  const offer = useAppSelector((state) => state.currentOffer);
-  const comments = useAppSelector((state) => state.comments);
-  const nearbyOffers = useAppSelector((state) => state.nearbyOffers).slice(0, 3);
-  const isLoading = useAppSelector((state) => state.isCurrentOfferLoading);
-  const isOfferNotFound = useAppSelector((state) => state.isOfferNotFound);
+  const offer = useAppSelector((state) => state.offer.currentOffer);
+  const comments = useAppSelector((state) => state.offer.comments);
+  const nearbyOffers = useAppSelector((state) => state.offer.nearbyOffers).slice(0, 3);
+  const isLoading = useAppSelector((state) => state.offer.isCurrentOfferLoading);
+  const isOfferNotFound = useAppSelector((state) => state.offer.isOfferNotFound);
 
   useEffect(() => {
     if (id) {

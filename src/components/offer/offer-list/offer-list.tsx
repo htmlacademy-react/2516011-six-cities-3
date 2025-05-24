@@ -3,10 +3,10 @@ import { BaseOffer, OfferShort } from '../../../types/offer.ts';
 
 interface OfferListProps {
   offers: OfferShort[];
-  onCardHover?: (offer: BaseOffer | undefined) => void;
+  onCardSelect?: (offer: BaseOffer | undefined) => void;
 }
 
-function OfferList({ offers, onCardHover }: OfferListProps) {
+function OfferList({ offers, onCardSelect }: OfferListProps) {
   return (
     <div className="cities__places-list places__list tabs__content">
       {offers.map((offer) => (
@@ -20,8 +20,8 @@ function OfferList({ offers, onCardHover }: OfferListProps) {
           isPremium={offer.isPremium}
           rating={offer.rating}
           previewImage={offer.previewImage || 'default-image.png'}
-          onMouseEnter={() => onCardHover?.(offer)}
-          onMouseLeave={() => onCardHover?.(undefined)}
+          onMouseEnter={() => onCardSelect?.(offer)}
+          onMouseLeave={() => onCardSelect?.(undefined)}
         />
       ))}
     </div>
