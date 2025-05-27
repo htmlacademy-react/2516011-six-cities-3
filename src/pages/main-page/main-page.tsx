@@ -7,6 +7,8 @@ import { SortOptions } from '../../utils/const';
 import { SortOption } from '../../types/sort.ts';
 import { sortOffers } from '../../utils/sort.ts';
 import { BaseOffer } from '../../types/offer.ts';
+
+import MainEmpty from '../../components/main-empty/main-empty';
 import OfferList from '../../components/offer/offer-list/offer-list';
 import Map from '../../components/map/Map.tsx';
 
@@ -44,14 +46,7 @@ function MainPage() {
                 />
               </section>
             ) : (
-              <section className="cities__no-places">
-                <div className="cities__status-wrapper tabs__content">
-                  <b className="cities__status">No places to stay available</b>
-                  <p className="cities__status-description">
-                    We could not find any property available at the moment in {currentCity}
-                  </p>
-                </div>
-              </section>
+              <MainEmpty city={currentCity} />
             )}
             <div className="cities__right-section">{hasOffers && <Map offers={filteredOffers} cityLocation={currentCityLocation} currentOffer={hoveredOffer}/>}</div>
           </div>

@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom';
 import { OfferShort } from '../../../types/offer';
 
 function FavoriteCard({ id, title, type, price, rating, previewImage, isPremium }: OfferShort) {
+  const ratingPercent = `${Math.round(rating) * 20}%`;
+
   return (
     <article className="favorites__card place-card" data-id={id}>
       {isPremium && (
@@ -29,7 +31,7 @@ function FavoriteCard({ id, title, type, price, rating, previewImage, isPremium 
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: `${rating}%` }}></span>
+            <span style={{width: ratingPercent}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

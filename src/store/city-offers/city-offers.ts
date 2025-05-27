@@ -27,8 +27,15 @@ export const cityOffers = createSlice({
     setOffersDataLoadingStatus: (state, action: PayloadAction<boolean>) => {
       state.isOffersDataLoading = action.payload;
     },
+    setFavoriteStatus(state, action: PayloadAction<{ id: string; isFavorite: boolean }>) {
+      state.offers = state.offers.map((offer) =>
+        offer.id === action.payload.id
+          ? { ...offer, isFavorite: action.payload.isFavorite }
+          : offer
+      );
+    }
   },
 });
 
-export const { changeCity, setOffers, setOffersDataLoadingStatus } = cityOffers.actions;
+export const { changeCity, setOffers, setOffersDataLoadingStatus, setFavoriteStatus } = cityOffers.actions;
 export default cityOffers.reducer;
