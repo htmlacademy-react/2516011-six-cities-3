@@ -11,9 +11,11 @@ function Header() {
   );
   const userData = useAppSelector((state) => state.user.userData);
 
+  const favorites = useAppSelector((state) => state.favorite.favorites);
+  const favoriteCount = favorites.length;
+
   const isUserLoggedIn = authorizationStatus === AuthorizationStatus.Auth;
   const userName = userData?.email ?? '';
-  const favoriteCount = 0;
 
   return (
     <header className="header">
@@ -35,7 +37,7 @@ function Header() {
               {isUserLoggedIn ? (
                 <>
                   <li className="header__nav-item user">
-                    <Link className="header__nav-link header__nav-link--profile" to="#">
+                    <Link className="header__nav-link header__nav-link--profile" to={AppRoutes.FAVORITES}>
                       <div className="header__avatar-wrapper user__avatar-wrapper"></div>
                       <span className="header__user-name">{userName}</span>
                       <span className="header__favorite-count">{favoriteCount}</span>
