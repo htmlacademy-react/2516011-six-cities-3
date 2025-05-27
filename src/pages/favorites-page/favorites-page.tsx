@@ -1,7 +1,5 @@
-import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fetchFavoritesAction } from '../../store/api-actions';
-import {getFavorites, getIsFavoritesLoading} from '../../store/favorite/selectors';
+import { useAppSelector } from '../../hooks';
+import { getFavorites, getIsFavoritesLoading } from '../../store/favorite/selectors';
 
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
@@ -9,13 +7,8 @@ import FavoriteLocation from '../../components/favorite/favorite-location/favori
 import Spinner from '../../components/spinner/spinner.tsx';
 
 function FavoritesPage() {
-  const dispatch = useAppDispatch();
   const favoritePlaces = useAppSelector(getFavorites);
   const isLoading = useAppSelector(getIsFavoritesLoading);
-
-  useEffect(() => {
-    dispatch(fetchFavoritesAction());
-  }, [dispatch]);
 
   const groupedFavorites = favoritePlaces.reduce<{ [key: string]: typeof favoritePlaces }>((acc, offer) => {
     const cityName = offer.city.name;

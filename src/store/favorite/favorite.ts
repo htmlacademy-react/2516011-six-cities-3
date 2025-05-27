@@ -5,11 +5,13 @@ import { OfferShort } from '../../types/offer';
 interface FavoriteState {
   favorites: OfferShort[];
   isFavoritesLoading: boolean;
+  hasFavoritesBeenLoaded: boolean;
 }
 
 const initialState: FavoriteState = {
   favorites: [],
   isFavoritesLoading: false,
+  hasFavoritesBeenLoaded: false
 };
 
 export const favorite = createSlice({
@@ -37,9 +39,12 @@ export const favorite = createSlice({
       } else {
         state.favorites = state.favorites.filter((o) => o.id !== updatedOffer.id);
       }
+    },
+    setHasFavoritesBeenLoaded(state, action: PayloadAction<boolean>) {
+      state.hasFavoritesBeenLoaded = action.payload;
     }
   },
 });
 
-export const { setFavorites, setFavoritesLoading } = favorite.actions;
+export const { setFavorites, setFavoritesLoading, setHasFavoritesBeenLoaded } = favorite.actions;
 export const favoriteActions = favorite.actions;

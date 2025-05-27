@@ -9,7 +9,7 @@ import { UserData } from '../types/user-data';
 import { APIRoutes, AuthorizationStatus, AppRoutes } from '../utils/const';
 
 import { setFavoriteStatus as setCityFavoriteStatus, setOffers, setOffersDataLoadingStatus, } from './city-offers/city-offers';
-import { favoriteActions, setFavorites, setFavoritesLoading } from './favorite/favorite.ts';
+import {favoriteActions, setFavorites, setFavoritesLoading, setHasFavoritesBeenLoaded} from './favorite/favorite.ts';
 import {
   requireAuthorization,
   setUserData
@@ -180,9 +180,16 @@ export const fetchFavoritesAction = createAsyncThunk<
   'favorite/fetchFavorites',
   async (_arg, { dispatch, extra: api }) => {
     dispatch(setFavoritesLoading(true));
-    const { data } = await api.get<OfferShort[]>(APIRoutes.Favorite);
-    dispatch(setFavorites(data));
-    dispatch(setFavoritesLoading(false));
-    return data;
+    try {
+      const { data } = await api.get<OfferShort[]>(APIRoutes.Favorite);
+      dispatch(setFavorites(data));
+      dispatch(setHasFavoritesBeenLoaded(true));
+      return data;
+    } catch (error) {
+      dispatch(setHasFavoritesBeenLoaded(true));
+      throw error;
+    } finally {
+      dispatch(setFavoritesLoading(false));
+    }
   }
 );
