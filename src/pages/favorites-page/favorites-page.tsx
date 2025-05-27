@@ -1,15 +1,23 @@
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchFavoritesAction } from '../../store/api-actions';
+import {getFavorites, getIsFavoritesLoading} from '../../store/favorite/selectors';
+
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import FavoriteLocation from '../../components/favorite/favorite-location/favorite-location';
-import { OfferShort } from '../../types/offer';
+import Spinner from '../../components/spinner/spinner.tsx';
 
-interface FavoritesPageProps {
-  favoritePlaces: OfferShort[];
-}
+function FavoritesPage() {
+  const dispatch = useAppDispatch();
+  const favoritePlaces = useAppSelector(getFavorites);
+  const isLoading = useAppSelector(getIsFavoritesLoading);
 
-function FavoritesPage({ favoritePlaces }: FavoritesPageProps) {
+  useEffect(() => {
+    dispatch(fetchFavoritesAction());
+  }, [dispatch]);
 
-  const groupedFavorites = favoritePlaces.reduce<{ [key: string]: OfferShort[] }>((acc, offer) => {
+  const groupedFavorites = favoritePlaces.reduce<{ [key: string]: typeof favoritePlaces }>((acc, offer) => {
     const cityName = offer.city.name;
     if (!acc[cityName]) {
       acc[cityName] = [];
@@ -19,6 +27,20 @@ function FavoritesPage({ favoritePlaces }: FavoritesPageProps) {
   }, {});
 
   const hasFavorites = favoritePlaces.length > 0;
+
+  if (isLoading) {
+    return (
+      <div className="page">
+        <Header />
+        <main className="page__main page__main--favorites">
+          <div className="page__favorites-container container">
+            <Spinner />
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className={`page ${!hasFavorites ? 'page--favorites-empty' : ''}`}>

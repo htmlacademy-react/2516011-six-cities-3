@@ -11,13 +11,7 @@ import PrivateRoute from '../private-route/private-route';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
 
-import { OfferShort } from '../../types/offer.ts';
-
-interface AppProps {
-  favoritePlaces?: OfferShort[];
-}
-
-function App({favoritePlaces = [],}: AppProps) {
+function App() {
   const authorizationStatus = useAppSelector((state) => state.user.authorizationStatus);
   const isOffersDataLoading = useAppSelector((state) => state.cityOffers.isOffersDataLoading);
 
@@ -52,7 +46,7 @@ function App({favoritePlaces = [],}: AppProps) {
             <PrivateRoute
               authorizationStatus={authorizationStatus}
             >
-              <FavoritesPage favoritePlaces={favoritePlaces}/>
+              <FavoritesPage/>
             </PrivateRoute>
           }
         />

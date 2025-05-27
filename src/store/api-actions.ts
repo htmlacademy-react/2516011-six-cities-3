@@ -9,6 +9,7 @@ import { UserData } from '../types/user-data';
 import { APIRoutes, AuthorizationStatus, AppRoutes } from '../utils/const';
 
 import { setFavoriteStatus as setCityFavoriteStatus, setOffers, setOffersDataLoadingStatus, } from './city-offers/city-offers';
+import { favoriteActions, setFavorites, setFavoritesLoading } from './favorite/favorite.ts';
 import {
   requireAuthorization,
   setUserData
@@ -166,6 +167,22 @@ export const toggleFavoriteStatus = createAsyncThunk<
     const { data } = await api.post<OfferShort>(`${APIRoutes.Favorite}/${offerId}/${status ? 1 : 0}`);
     dispatch(setCityFavoriteStatus({ id: data.id, isFavorite: data.isFavorite }));
     dispatch(setOfferFavoriteStatus({ id: data.id, isFavorite: data.isFavorite }));
+    dispatch(favoriteActions.setFavoriteStatus(data));
+    return data;
+  }
+);
+
+export const fetchFavoritesAction = createAsyncThunk<
+  OfferShort[],
+  undefined,
+  { dispatch: AppDispatch; state: State; extra: AxiosInstance }
+>(
+  'favorite/fetchFavorites',
+  async (_arg, { dispatch, extra: api }) => {
+    dispatch(setFavoritesLoading(true));
+    const { data } = await api.get<OfferShort[]>(APIRoutes.Favorite);
+    dispatch(setFavorites(data));
+    dispatch(setFavoritesLoading(false));
     return data;
   }
 );
