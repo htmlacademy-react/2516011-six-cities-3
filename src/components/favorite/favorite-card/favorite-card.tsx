@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { OfferShort } from '../../../types/offer';
 import FavoriteButton from '../favorite-button/favorite-button.tsx';
 
-function FavoriteCard({ id, title, type, isFavorite, price, rating, previewImage, isPremium }: OfferShort) {
+function FavoriteCard({ id, title, type, price, rating, previewImage, isPremium }: OfferShort) {
   const ratingPercent = `${Math.round(rating) * 20}%`;
 
   return (
@@ -23,7 +23,7 @@ function FavoriteCard({ id, title, type, isFavorite, price, rating, previewImage
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <FavoriteButton offerId={id} isFavorite={isFavorite} />
+          <FavoriteButton offerId={id} />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

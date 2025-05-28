@@ -4,10 +4,9 @@ interface Props {
   id: string;
   title: string;
   isPremium: boolean;
-  isFavorite: boolean;
 }
 
-function OfferTitle({ id, title, isPremium, isFavorite }: Props) {
+function OfferTitle({ id, title, isPremium }: Props) {
   return (
     <>
       {isPremium && (
@@ -16,7 +15,7 @@ function OfferTitle({ id, title, isPremium, isFavorite }: Props) {
         </div>
       )}
       <h1 className="offer__name">{title}</h1>
-      <FavoriteButton offerId={id} isFavorite={isFavorite} className={'offer'} width={31} height={33}/>
+      <FavoriteButton offerId={id} className={'offer'} width={31} height={33}/>
     </>
   );
 }

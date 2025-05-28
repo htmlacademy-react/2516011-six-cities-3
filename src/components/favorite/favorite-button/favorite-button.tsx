@@ -1,16 +1,18 @@
-import { useAppDispatch } from '../../../hooks';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { toggleFavoriteStatus } from '../../../store/api-actions';
+import {getFavoriteOfferById} from '../../../store/favorite/selectors.ts';
 
 type FavoriteButtonProps = {
   offerId: string;
-  isFavorite: boolean;
   className?: string;
   width?: number;
   height?: number;
 };
 
-function FavoriteButton({offerId, isFavorite, className = 'place-card', width = 18, height = 19}: FavoriteButtonProps) {
+function FavoriteButton({offerId, className = 'place-card', width = 18, height = 19}: FavoriteButtonProps) {
   const dispatch = useAppDispatch();
+  const offer = useAppSelector((state) => getFavoriteOfferById(state, offerId));
+  const isFavorite = offer?.isFavorite ?? false;
 
   const handleClick = () => {
     dispatch(toggleFavoriteStatus({
