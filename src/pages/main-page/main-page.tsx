@@ -7,14 +7,17 @@ import { SortOptions } from '../../utils/const';
 import { SortOption } from '../../types/sort.ts';
 import { sortOffers } from '../../utils/sort.ts';
 import { BaseOffer } from '../../types/offer.ts';
+
+import MainEmpty from '../../components/main-empty/main-empty';
 import OfferList from '../../components/offer/offer-list/offer-list';
 import Map from '../../components/map/Map.tsx';
+import {getCityLocation, getCityName, getOffers} from '../../store/city-offers/selectors.ts';
 
 
 function MainPage() {
-  const currentCity = useAppSelector((state) => state.cityOffers.city.name);
-  const currentCityLocation = useAppSelector((state) => state.cityOffers.city.location);
-  const allOffers = useAppSelector((state) => state.cityOffers.offers);
+  const currentCity = useAppSelector(getCityName);
+  const currentCityLocation = useAppSelector(getCityLocation);
+  const allOffers = useAppSelector(getOffers);
 
   const filteredOffers = allOffers.filter((offer) => offer.city.name === currentCity);
   const rentalOffersCount = filteredOffers.length;
@@ -44,14 +47,7 @@ function MainPage() {
                 />
               </section>
             ) : (
-              <section className="cities__no-places">
-                <div className="cities__status-wrapper tabs__content">
-                  <b className="cities__status">No places to stay available</b>
-                  <p className="cities__status-description">
-                    We could not find any property available at the moment in {currentCity}
-                  </p>
-                </div>
-              </section>
+              <MainEmpty city={currentCity} />
             )}
             <div className="cities__right-section">{hasOffers && <Map offers={filteredOffers} cityLocation={currentCityLocation} currentOffer={hoveredOffer}/>}</div>
           </div>

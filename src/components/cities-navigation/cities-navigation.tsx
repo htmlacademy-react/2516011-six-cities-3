@@ -3,9 +3,10 @@ import clsx from 'clsx';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { changeCity } from '../../store/city-offers/city-offers';
 import { cityData } from '../../utils/const';
+import { getCityName } from '../../store/city-offers/selectors.ts';
 
 function CitiesNavigation() {
-  const currentCity = useAppSelector((state) => state.cityOffers.city.name);
+  const currentCity = useAppSelector(getCityName);
 
   const dispatch = useAppDispatch();
 

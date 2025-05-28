@@ -38,6 +38,14 @@ export const offer = createSlice({
     setComments(state, action: PayloadAction<Comment[]>) {
       state.comments = action.payload;
     },
+    setFavoriteStatus(state, action: PayloadAction<{ id: string; isFavorite: boolean }>) {
+      if (state.currentOffer && state.currentOffer.id === action.payload.id) {
+        state.currentOffer.isFavorite = action.payload.isFavorite;
+      }
+      state.nearbyOffers = state.nearbyOffers.map((nearbyOffer) =>
+        nearbyOffer.id === action.payload.id ? { ...nearbyOffer, isFavorite: action.payload.isFavorite } : nearbyOffer
+      );
+    }
   },
 });
 
@@ -47,6 +55,7 @@ export const {
   setOfferNotFound,
   setNearbyOffers,
   setComments,
+  setFavoriteStatus
 } = offer.actions;
 
 export default offer.reducer;

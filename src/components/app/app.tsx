@@ -1,6 +1,7 @@
-import {Route, Routes} from 'react-router-dom';
-import { useAppSelector } from '../../hooks';
-import {AppRoutes, AuthorizationStatus} from '../../utils/const';
+import { useEffect } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { AppRoutes, AuthorizationStatus } from '../../utils/const';
 import MainPage from '../../pages/main-page/main-page';
 import LoginPage from '../../pages/login-page/login-page';
 import FavoritesPage from '../../pages/favorites-page/favorites-page';
@@ -10,22 +11,34 @@ import Spinner from '../spinner/spinner';
 import PrivateRoute from '../private-route/private-route';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
+import PublicRoute from '../public-route/public-route.tsx';
+import { fetchFavoritesAction } from '../../store/api-actions';
+import { getAuthorizationStatus } from '../../store/user/selectors.ts';
+import { getOffersDataLoadingStatus } from '../../store/city-offers/selectors.ts';
+import { getHasFavoritesBeenLoaded } from '../../store/favorite/selectors.ts';
 
-import { OfferShort } from '../../types/offer.ts';
+function App() {
+  const dispatch = useAppDispatch();
 
-interface AppProps {
-  favoritePlaces?: OfferShort[];
-}
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const isOffersDataLoading = useAppSelector(getOffersDataLoadingStatus);
+  const hasFavoritesBeenLoaded = useAppSelector(getHasFavoritesBeenLoaded);
 
-function App({favoritePlaces = [],}: AppProps) {
-  const authorizationStatus = useAppSelector((state) => state.user.authorizationStatus);
-  const isOffersDataLoading = useAppSelector((state) => state.cityOffers.isOffersDataLoading);
+  useEffect(() => {
+    if (
+      authorizationStatus === AuthorizationStatus.Auth &&
+      !hasFavoritesBeenLoaded
+    ) {
+      dispatch(fetchFavoritesAction());
+    }
+  }, [authorizationStatus, hasFavoritesBeenLoaded, dispatch]);
 
-  if (authorizationStatus === AuthorizationStatus.Unknown
-    || isOffersDataLoading) {
-    return (
-      <Spinner />
-    );
+  if (
+    authorizationStatus === AuthorizationStatus.Unknown ||
+    isOffersDataLoading ||
+    (authorizationStatus === AuthorizationStatus.Auth && !hasFavoritesBeenLoaded)
+  ) {
+    return <Spinner />;
   }
 
   return (
@@ -37,7 +50,11 @@ function App({favoritePlaces = [],}: AppProps) {
         />
         <Route
           path={AppRoutes.LOGIN}
-          element={<LoginPage/>}
+          element={
+            <PublicRoute authorizationStatus={authorizationStatus}>
+              <LoginPage />
+            </PublicRoute>
+          }
         />
         <Route
           path={`${AppRoutes.OFFER}`}
@@ -52,7 +69,7 @@ function App({favoritePlaces = [],}: AppProps) {
             <PrivateRoute
               authorizationStatus={authorizationStatus}
             >
-              <FavoritesPage favoritePlaces={favoritePlaces}/>
+              <FavoritesPage/>
             </PrivateRoute>
           }
         />

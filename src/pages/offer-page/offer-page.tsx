@@ -18,16 +18,23 @@ import Spinner from '../../components/spinner/spinner';
 import { AppRoutes } from '../../utils/const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import {fetchOfferById, fetchNearbyOffers, fetchComments} from '../../store/api-actions';
+import {
+  getComments,
+  getCurrentOffer,
+  getIsCurrentOfferLoading,
+  getIsOfferNotFound,
+  getNearbyOffers
+} from '../../store/offer/selectors.ts';
 
 function OfferPage() {
   const { id } = useParams<{ id: string }>();
   const dispatch = useAppDispatch();
 
-  const offer = useAppSelector((state) => state.offer.currentOffer);
-  const comments = useAppSelector((state) => state.offer.comments);
-  const nearbyOffers = useAppSelector((state) => state.offer.nearbyOffers).slice(0, 3);
-  const isLoading = useAppSelector((state) => state.offer.isCurrentOfferLoading);
-  const isOfferNotFound = useAppSelector((state) => state.offer.isOfferNotFound);
+  const offer = useAppSelector(getCurrentOffer);
+  const comments = useAppSelector(getComments);
+  const nearbyOffers = useAppSelector(getNearbyOffers).slice(0, 3);
+  const isLoading = useAppSelector(getIsCurrentOfferLoading);
+  const isOfferNotFound = useAppSelector(getIsOfferNotFound);
 
   useEffect(() => {
     if (id) {
@@ -53,7 +60,7 @@ function OfferPage() {
           <OfferGallery images={offer.images}/>
           <div className="offer__container container">
             <div className="offer__wrapper">
-              <OfferTitle title={offer.title} isPremium={offer.isPremium} isFavorite={offer.isFavorite}/>
+              <OfferTitle id={offer.id} title={offer.title} isPremium={offer.isPremium} isFavorite={offer.isFavorite}/>
               <OfferRating rating={offer.rating}/>
               <OfferFeatures type={offer.type} bedrooms={offer.bedrooms} maxAdults={offer.maxAdults}/>
               <OfferPrice price={offer.price}/>

@@ -15,7 +15,7 @@ const StatusCodeMapping: Record<number, boolean> = {
 };
 
 const shouldDisplayError = (response: AxiosResponse) =>
-  !!StatusCodeMapping[response.status];
+  StatusCodeMapping[response.status];
 
 const BACKEND_URL = 'https://15.design.htmlacademy.pro/six-cities';
 const REQUEST_TIMEOUT = 5000;
