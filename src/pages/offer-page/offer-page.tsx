@@ -53,7 +53,7 @@ function OfferPage() {
           <OfferGallery images={offer.images}/>
           <div className="offer__container container">
             <div className="offer__wrapper">
-              <OfferTitle title={offer.title} isPremium={offer.isPremium} isFavorite={offer.isFavorite}/>
+              <OfferTitle id={offer.id} title={offer.title} isPremium={offer.isPremium} isFavorite={offer.isFavorite}/>
               <OfferRating rating={offer.rating}/>
               <OfferFeatures type={offer.type} bedrooms={offer.bedrooms} maxAdults={offer.maxAdults}/>
               <OfferPrice price={offer.price}/>

@@ -1,10 +1,13 @@
+import FavoriteButton from '../../favorite/favorite-button/favorite-button.tsx';
+
 interface Props {
+  id: string;
   title: string;
   isPremium: boolean;
   isFavorite: boolean;
 }
 
-function OfferTitle({ title, isPremium, isFavorite }: Props) {
+function OfferTitle({ id, title, isPremium, isFavorite }: Props) {
   return (
     <>
       {isPremium && (
@@ -13,12 +16,7 @@ function OfferTitle({ title, isPremium, isFavorite }: Props) {
         </div>
       )}
       <h1 className="offer__name">{title}</h1>
-      <button className={`offer__bookmark-button button ${isFavorite ? 'offer__bookmark-button--active' : ''}`} type="button">
-        <svg className="offer__bookmark-icon" width="31" height="33">
-          <use xlinkHref="#icon-bookmark"></use>
-        </svg>
-        <span className="visually-hidden">To bookmarks</span>
-      </button>
+      <FavoriteButton offerId={id} isFavorite={isFavorite} className={'offer'} width={31} height={33}/>
     </>
   );
 }
