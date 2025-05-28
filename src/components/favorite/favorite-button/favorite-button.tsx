@@ -1,8 +1,5 @@
-import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { useNavigate } from 'react-router-dom';
-import { AppRoutes, AuthorizationStatus } from '../../../utils/const';
+import { useAppDispatch } from '../../../hooks';
 import { toggleFavoriteStatus } from '../../../store/api-actions';
-import { getAuthorizationStatus } from '../../../store/user/selectors';
 
 type FavoriteButtonProps = {
   offerId: string;
@@ -14,15 +11,8 @@ type FavoriteButtonProps = {
 
 function FavoriteButton({offerId, isFavorite, className = 'place-card', width = 18, height = 19}: FavoriteButtonProps) {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-  const authStatus = useAppSelector(getAuthorizationStatus);
 
   const handleClick = () => {
-    if (authStatus !== AuthorizationStatus.Auth) {
-      navigate(AppRoutes.LOGIN);
-      return;
-    }
-
     dispatch(toggleFavoriteStatus({
       offerId,
       status: !isFavorite,
