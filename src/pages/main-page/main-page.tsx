@@ -11,12 +11,13 @@ import { BaseOffer } from '../../types/offer.ts';
 import MainEmpty from '../../components/main-empty/main-empty';
 import OfferList from '../../components/offer/offer-list/offer-list';
 import Map from '../../components/map/Map.tsx';
+import {getCityLocation, getCityName, getOffers} from '../../store/city-offers/selectors.ts';
 
 
 function MainPage() {
-  const currentCity = useAppSelector((state) => state.cityOffers.city.name);
-  const currentCityLocation = useAppSelector((state) => state.cityOffers.city.location);
-  const allOffers = useAppSelector((state) => state.cityOffers.offers);
+  const currentCity = useAppSelector(getCityName);
+  const currentCityLocation = useAppSelector(getCityLocation);
+  const allOffers = useAppSelector(getOffers);
 
   const filteredOffers = allOffers.filter((offer) => offer.city.name === currentCity);
   const rentalOffersCount = filteredOffers.length;

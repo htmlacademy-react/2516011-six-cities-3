@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom';
 import { AppRoutes, AuthorizationStatus } from '../../utils/const';
 import { logoutAction } from '../../store/api-actions';
 import { useAppDispatch, useAppSelector } from '../../hooks';
+import {getUserData} from '../../store/user/selectors.ts';
+import {getFavorites} from '../../store/favorite/selectors.ts';
 
 function Header() {
   const dispatch = useAppDispatch();
@@ -9,9 +11,9 @@ function Header() {
   const authorizationStatus = useAppSelector((state) =>
     state.user.authorizationStatus
   );
-  const userData = useAppSelector((state) => state.user.userData);
+  const userData = useAppSelector(getUserData);
 
-  const favorites = useAppSelector((state) => state.favorite.favorites);
+  const favorites = useAppSelector(getFavorites);
   const favoriteCount = favorites.length;
 
   const isUserLoggedIn = authorizationStatus === AuthorizationStatus.Auth;

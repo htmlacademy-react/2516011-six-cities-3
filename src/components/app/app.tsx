@@ -13,13 +13,16 @@ import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
 import PublicRoute from '../public-route/public-route.tsx';
 import { fetchFavoritesAction } from '../../store/api-actions';
+import { getAuthorizationStatus } from '../../store/user/selectors.ts';
+import { getOffersDataLoadingStatus } from '../../store/city-offers/selectors.ts';
+import { getHasFavoritesBeenLoaded } from '../../store/favorite/selectors.ts';
 
 function App() {
   const dispatch = useAppDispatch();
 
-  const authorizationStatus = useAppSelector((state) => state.user.authorizationStatus);
-  const isOffersDataLoading = useAppSelector((state) => state.cityOffers.isOffersDataLoading);
-  const hasFavoritesBeenLoaded = useAppSelector((state) => state.favorite.hasFavoritesBeenLoaded);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const isOffersDataLoading = useAppSelector(getOffersDataLoadingStatus);
+  const hasFavoritesBeenLoaded = useAppSelector(getHasFavoritesBeenLoaded);
 
   useEffect(() => {
     if (

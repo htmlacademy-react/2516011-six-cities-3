@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { postComment } from '../../../store/api-actions';
-import { RATINGS, AuthorizationStatus } from '../../../utils/const';
+import { RATINGS } from '../../../utils/const';
 import './offer-reviews-form.styles.scss';
 import { toast } from 'react-toastify';
+import {isAuthorized as selectIsAuthorized} from '../../../store/user/selectors.ts';
 
 interface ReviewsFormProps {
   offerId: string;
@@ -15,7 +16,7 @@ function ReviewsForm({ offerId }: ReviewsFormProps) {
   const [reviewText, setReviewText] = useState('');
   const [rating, setRating] = useState<number | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const isAuthorized = useAppSelector((state) => state.user.authorizationStatus === AuthorizationStatus.Auth);
+  const isAuthorized = useAppSelector(selectIsAuthorized);
 
   const isValid = rating !== null && reviewText.length >= 50 && reviewText.length <= 300;
 
