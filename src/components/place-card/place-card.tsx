@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { getRatingWidth } from '../../utils/helpers';
-import FavoriteButton from "../favorite/favorite-button/favorite-button.tsx";
+import FavoriteButton from '../favorite/favorite-button/favorite-button.tsx';
 
 interface Props {
   id: string;
