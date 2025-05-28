@@ -1,14 +1,12 @@
-import React from 'react';
-import {Navigate} from 'react-router-dom';
-import {AppRoutes, AuthorizationStatus} from '../../utils/const';
+import { Navigate } from 'react-router-dom';
+import { PropsWithChildren } from 'react';
+import { AppRoutes, AuthorizationStatus } from '../../utils/const';
 
-type Props = {
+type PrivateRouteProps = {
   authorizationStatus: AuthorizationStatus;
-  children: React.ReactNode;
-}
+};
 
-function PrivateRoute(props: Props) {
-  const {authorizationStatus, children} = props;
+function PrivateRoute({ authorizationStatus, children }: PropsWithChildren<PrivateRouteProps>) {
   return (
     authorizationStatus === AuthorizationStatus.Auth
       ? children
