@@ -13,7 +13,7 @@ function FavoriteCard({ id, title, type, price, rating, previewImage, isPremium 
         </div>
       )}
       <div className="favorites__image-wrapper place-card__image-wrapper">
-        <Link to="#">
+        <Link to={`/offer/${id}`}>
           <img className="place-card__image" src={previewImage} width="150" height="110" alt="Place image" />
         </Link>
       </div>
@@ -32,7 +32,7 @@ function FavoriteCard({ id, title, type, price, rating, previewImage, isPremium 
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to="#">{title}</Link>
+          <Link to={`/offer/${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
