@@ -7,5 +7,5 @@ export const getAuthorizationStatus = (state: State): AuthorizationStatus =>
   state[NameSpace.User].authorizationStatus;
 export const getUserData = (state: State): UserData | null =>
   state[NameSpace.User].userData;
-export const isAuthorized = (state: State): boolean =>
+export const getIsAuthorized = (state: State): boolean =>
   state.user.authorizationStatus === AuthorizationStatus.Auth;

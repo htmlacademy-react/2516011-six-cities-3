@@ -1,13 +1,12 @@
-import React from 'react';
 import { Navigate } from 'react-router-dom';
+import { PropsWithChildren } from 'react';
 import { AppRoutes, AuthorizationStatus } from '../../utils/const';
 
-type Props = {
+type PublicRouteProps = {
   authorizationStatus: AuthorizationStatus;
-  children: React.ReactNode;
 };
 
-function PublicRoute({ authorizationStatus, children }: Props) {
+function PublicRoute({ authorizationStatus, children }: PropsWithChildren<PublicRouteProps>) {
   return (
     authorizationStatus === AuthorizationStatus.Auth
       ? <Navigate to={AppRoutes.MAIN} />

@@ -16,7 +16,6 @@ function OfferList({ offers, onCardSelect }: OfferListProps) {
           title={offer.title}
           type={offer.type}
           price={offer.price}
-          isFavorite={offer.isFavorite}
           isPremium={offer.isPremium}
           rating={offer.rating}
           previewImage={offer.previewImage || 'default-image.png'}

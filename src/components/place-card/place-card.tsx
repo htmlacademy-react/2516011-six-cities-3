@@ -7,7 +7,6 @@ interface Props {
   title: string;
   type: string;
   price: number;
-  isFavorite: boolean;
   isPremium: boolean;
   rating: number;
   previewImage: string;
@@ -20,7 +19,6 @@ function PlaceCard({
   title,
   type,
   price,
-  isFavorite,
   isPremium,
   rating,
   previewImage,
@@ -52,7 +50,7 @@ function PlaceCard({
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <FavoriteButton offerId={id} isFavorite={isFavorite} />
+          <FavoriteButton offerId={id} />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

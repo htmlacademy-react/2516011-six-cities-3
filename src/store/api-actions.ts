@@ -23,6 +23,7 @@ import {
   setFavoriteStatus as setOfferFavoriteStatus,
 } from './offer/offer';
 import { redirectToRoute } from './action';
+import {getAuthorizationStatus} from './user/selectors.ts';
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
@@ -163,12 +164,24 @@ export const toggleFavoriteStatus = createAsyncThunk<
   }
 >(
   'offer/toggleFavoriteStatus',
-  async ({ offerId, status }, { dispatch, extra: api }) => {
-    const { data } = await api.post<OfferShort>(`${APIRoutes.Favorite}/${offerId}/${status ? 1 : 0}`);
-    dispatch(setCityFavoriteStatus({ id: data.id, isFavorite: data.isFavorite }));
-    dispatch(setOfferFavoriteStatus({ id: data.id, isFavorite: data.isFavorite }));
-    dispatch(favoriteActions.setFavoriteStatus(data));
-    return data;
+  async ({ offerId, status }, { dispatch, getState, extra: api, rejectWithValue }) => {
+    const state = getState();
+    const authStatus = getAuthorizationStatus(state);
+
+    if (authStatus !== AuthorizationStatus.Auth) {
+      dispatch(redirectToRoute(AppRoutes.LOGIN));
+      return rejectWithValue('User not authorized');
+    }
+
+    try {
+      const { data } = await api.post<OfferShort>(`${APIRoutes.Favorite}/${offerId}/${status ? 1 : 0}`);
+      dispatch(setCityFavoriteStatus({ id: data.id, isFavorite: data.isFavorite }));
+      dispatch(setOfferFavoriteStatus({ id: data.id, isFavorite: data.isFavorite }));
+      dispatch(favoriteActions.setFavoriteStatus(data));
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
   }
 );
 
